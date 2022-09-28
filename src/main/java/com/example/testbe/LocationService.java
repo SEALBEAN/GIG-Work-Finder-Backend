@@ -1,8 +1,8 @@
-package testdb;
+package com.example.testbe;
 
+import com.example.testbe.Entity.LocationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import testdb.Entity.LocationEntity;
 
 import java.util.List;
 

@@ -1,19 +1,18 @@
-package testdb;
+package com.example.testbe;
 
+import com.example.testbe.Entity.LocationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import testdb.Entity.LocationEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("Location/1loc")
+@RequestMapping("Location")
 public class LocationController {
 
     @Autowired
     private LocationService locationService;
-    @GetMapping("/{as}")
+    @GetMapping("/1/{as}")
     public List<LocationEntity> loc(@PathVariable String as){
         //return locationService.find(1);
 
@@ -27,6 +26,16 @@ public class LocationController {
 //            result.add(dto);
 //        }
 //        return result;
+    }
+
+    @GetMapping("/2")
+    public LocationEntity loc2(){
+        return locationService.find(1);
+    }
+
+    @GetMapping("/3")
+    public String loc3(){
+        return "Hello World";
     }
 
     @PostMapping()
