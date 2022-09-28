@@ -1,8 +1,8 @@
-package com.seal.testdb;
+package testdb;
 
-import com.seal.testdb.Entity.LocationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import testdb.Entity.LocationEntity;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.seal.testdb.Entity;
+package testdb.Entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

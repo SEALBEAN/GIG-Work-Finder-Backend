@@ -1,13 +1,13 @@
-package com.seal.testdb;
+package com.example.testbe;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestDbApplication {
+public class TestBeApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TestDbApplication.class, args);
+        SpringApplication.run(TestBeApplication.class, args);
     }
 
 }

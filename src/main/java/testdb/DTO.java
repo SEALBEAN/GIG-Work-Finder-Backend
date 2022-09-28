@@ -1,10 +1,10 @@
-package com.seal.testdb;
+package testdb;
 
-import com.seal.testdb.Entity.LocationEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import testdb.Entity.LocationEntity;
 
 @Getter
 @Setter
