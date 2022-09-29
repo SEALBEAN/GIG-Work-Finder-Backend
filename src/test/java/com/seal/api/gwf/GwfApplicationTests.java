@@ -1,13 +1,13 @@
-package com.example.testbe;
+package com.seal.api.gwf;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TestBeApplicationTests {
+class GwfApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
 
 }
