@@ -56,13 +56,13 @@ public class JobOfferEntity {
     @Column(name = "Age")
     private Integer age;
 
-    @Column(name = "Visual", nullable = true)
+    @Column(name = "Visual")
     private Integer visual;
 
     @Column(name = "JobDescription", columnDefinition = "ntext")
     private String jobDescription;
 
-    @Column(name = "Other", columnDefinition = "ntext", nullable = true)
+    @Column(name = "Other", columnDefinition = "ntext")
     private String other;
 
     @Column(name = "StartTime")
