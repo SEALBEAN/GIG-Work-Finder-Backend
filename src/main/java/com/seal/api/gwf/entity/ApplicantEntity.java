@@ -22,10 +22,10 @@ public class ApplicantEntity {
     private int accountID;
 
     @Column(name = "LocationID")
-    private int locationID;
+    private Integer locationID;
 
     @Column(name = "DegreeID")
-    private int degreeID;
+    private Integer degreeID;
 
     @Column(name = "FirstName")
     private String firstName;
@@ -53,7 +53,7 @@ public class ApplicantEntity {
     private int totalOfReviews;
 
     @Column(name = "AverageStars")
-    private float averageStars;
+    private Float averageStars;
 
     @Column(name = "Verify")
     private int verify;
