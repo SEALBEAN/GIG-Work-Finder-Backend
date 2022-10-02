@@ -43,7 +43,7 @@ public class RecruiterEntity {
     private int totalOfReviews;
 
     @Column(name = "AverageStars")
-    private float averageStars;
+    private Float averageStars;
 
     @Column(name = "Verify")
     private int verify;
