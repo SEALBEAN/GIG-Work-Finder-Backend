@@ -75,4 +75,7 @@ public class JobOfferEntity {
 
     @Column(name = "Address", columnDefinition = "ntext")
     private String address;
+
+    @Column(name = "PopularScore")
+    private Float popularScore;
 }

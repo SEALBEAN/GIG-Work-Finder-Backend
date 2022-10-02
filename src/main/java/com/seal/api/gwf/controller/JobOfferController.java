@@ -26,6 +26,12 @@ public class JobOfferController {
     @GetMapping("/ALL")
     public List<JobOfferEntity> getAllJobOffers() {return jobOfferService.getAllJobOffers();}
 
+    @GetMapping("/GetHurry")
+    public List<JobOfferEntity> getHurryJobOffers(){return jobOfferService.getHurryJobOffers();}
+
+    @GetMapping("/GetPopular")
+    public List<JobOfferEntity> getPopularJobOffers() {return jobOfferService.getPopularJobOffers();}
+
 //    @PostMapping("/ID")
 //    public JobOfferEntity getByOfferID(@RequestParam int id) {return jobOfferService.findByOfferID(id);}
 

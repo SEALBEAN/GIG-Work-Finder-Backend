@@ -11,13 +11,19 @@ import java.util.List;
 public interface JobOfferRepository extends JpaRepository <JobOfferEntity, Integer> {
 
 
-    public List<JobOfferEntity> findByLocationID(int ID);
-
-    public List<JobOfferEntity> findByAccountID(int ID);
+    List<JobOfferEntity> findByLocationID(int ID);
+    List<JobOfferEntity> findByAccountID(int ID);
 
     @Query(value = "SELECT * FROM JobOffer\n" +
             "Where OfferID = ?1"
             , nativeQuery = true)
-    public JobOfferEntity findByOfferID(int ID);
+    JobOfferEntity findByOfferID(int ID);
+
+    @Query(value = "SELECT * FROM dbo.FN_HurryJobOffer()", nativeQuery = true)
+    List<JobOfferEntity> getHurryJobOffer();
+
+    @Query(value = "SELECT dbo.FN_PopScoreJobOffer(?1)", nativeQuery = true)
+    Float calPopularScore(int id);
+
 
 }
