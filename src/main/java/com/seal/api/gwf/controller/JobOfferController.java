@@ -17,12 +17,6 @@ public class JobOfferController {
     @GetMapping("/ID/{id}")
     public JobOfferEntity getByOfferID(@PathVariable int id) {return jobOfferService.findByOfferID(id);}
 
-    @GetMapping("/LID/{id}")
-    public List<JobOfferEntity> getByLocationID(@PathVariable int id) {return jobOfferService.findByLocationID(id);}
-
-    @GetMapping("/AID/{id}")
-    public List<JobOfferEntity> getByAccountID(@PathVariable int id) {return jobOfferService.findByAccountID(id);}
-
     @GetMapping("/ALL")
     public List<JobOfferEntity> getAllJobOffers() {return jobOfferService.getAllJobOffers();}
 
@@ -31,9 +25,6 @@ public class JobOfferController {
 
     @GetMapping("/GetPopular")
     public List<JobOfferEntity> getPopularJobOffers() {return jobOfferService.getPopularJobOffers();}
-
-//    @PostMapping("/ID")
-//    public JobOfferEntity getByOfferID(@RequestParam int id) {return jobOfferService.findByOfferID(id);}
 
 
 }

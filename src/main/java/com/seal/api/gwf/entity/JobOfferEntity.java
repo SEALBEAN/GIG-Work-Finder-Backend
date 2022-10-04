@@ -22,20 +22,25 @@ public class JobOfferEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int offerID;
 
-    @Column(name = "AccountID", nullable = false)
-    private int accountID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "AccountID")
+    private RecruiterEntity recruiter;
 
-    @Column(name = "TypeID", nullable = false)
-    private int typeID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "TypeID")
+    private JobTypeEntity jobType;
 
-    @Column(name = "LocationID", nullable = false)
-    private int locationID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "LocationID")
+    private LocationEntity location;
 
-    @Column(name = "DegreeID")
-    private Integer degreeID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "DegreeID")
+    private DegreeEntity degree;
 
-    @Column(name = "BusinessID")
-    private Integer businessID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "BusinessID")
+    private BusinessEntity business;
 
     @Column(name = "NumOfRecruit", nullable = false)
     private int numOfRecruit;

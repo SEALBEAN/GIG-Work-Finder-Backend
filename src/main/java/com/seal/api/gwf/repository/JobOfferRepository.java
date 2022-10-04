@@ -11,9 +11,6 @@ import java.util.List;
 public interface JobOfferRepository extends JpaRepository <JobOfferEntity, Integer> {
 
 
-    List<JobOfferEntity> findByLocationID(int ID);
-    List<JobOfferEntity> findByAccountID(int ID);
-
     @Query(value = "SELECT * FROM JobOffer\n" +
             "Where OfferID = ?1"
             , nativeQuery = true)

@@ -25,8 +25,10 @@ public class ApplicantEntity {
     @Column(name = "LocationID")
     private Integer locationID;
 
-    @Column(name = "DegreeID")
-    private Integer degreeID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "DegreeID")
+    private DegreeEntity degree;
+
 
     @Column(name = "FirstName")
     private String firstName;
