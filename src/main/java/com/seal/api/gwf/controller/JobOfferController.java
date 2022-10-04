@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("JobOffer")
+@RequestMapping(value = "JobOffer")
 public class JobOfferController {
 
     @Autowired
@@ -17,9 +17,13 @@ public class JobOfferController {
     @GetMapping("/ID/{id}")
     public JobOfferEntity getByOfferID(@PathVariable int id) {return jobOfferService.findByOfferID(id);}
 
-    @GetMapping("/ALL")
-    public List<JobOfferEntity> getAllJobOffers() {return jobOfferService.getAllJobOffers();}
-
+    @RequestMapping(value = { "/ALL","/ALL/{quantity}"})
+    public List<JobOfferEntity> getAllJobOffers(@PathVariable(required = false) Integer quantity) {
+        if (quantity == null)
+        return jobOfferService.getAllJobOffers();
+        else
+            return jobOfferService.getAllJobOffers(1);
+    }
     @GetMapping("/GetHurry")
     public List<JobOfferEntity> getHurryJobOffers(){return jobOfferService.getHurryJobOffers();}
 

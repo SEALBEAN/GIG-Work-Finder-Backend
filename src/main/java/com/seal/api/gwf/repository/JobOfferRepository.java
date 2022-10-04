@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface JobOfferRepository extends JpaRepository <JobOfferEntity, Integer> {
 
+    @Query(value = "SELECT * FROM JobOffer WHERE Status = 1" ,nativeQuery = true)
+    List<JobOfferEntity> getAll();
 
     @Query(value = "SELECT * FROM JobOffer\n" +
             "Where OfferID = ?1"
