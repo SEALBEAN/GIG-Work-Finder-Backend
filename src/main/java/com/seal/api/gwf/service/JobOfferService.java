@@ -16,14 +16,10 @@ public class JobOfferService {
 
     public JobOfferEntity findByOfferID(int ID) { return jobOfferRepository.findByOfferID(ID);}
 
-    public List<JobOfferEntity> getAllJobOffers() {
-        return jobOfferRepository.getAll();
-    }
-
     public List<JobOfferEntity> getAllJobOffers(int quantity){
         List<JobOfferEntity> list = jobOfferRepository.getAll();
         int max = list.size();
-        if (quantity>=max)
+        if (quantity>=max || quantity == 0)
             return list;
         while (max > quantity){
             int randomIndex = (int)Math.floor(Math.random()*(max));
@@ -33,11 +29,17 @@ public class JobOfferService {
         return list;
     }
 
-    public List<JobOfferEntity> getHurryJobOffers(){
-        return jobOfferRepository.getHurryJobOffer();
+    public List<JobOfferEntity> getHurryJobOffers(int quantity){
+        ArrayList<JobOfferEntity> list = (ArrayList<JobOfferEntity>) jobOfferRepository.getHurryJobOffer();
+        if (quantity==0 || quantity>= list.size())
+            return list;
+        else{
+            return list.subList(0, quantity);
+        }
     }
 
-    public List<JobOfferEntity> getPopularJobOffers(){
+
+    public List<JobOfferEntity> getPopularJobOffers(int quantity){
         ArrayList<JobOfferEntity> list = (ArrayList<JobOfferEntity>) jobOfferRepository.getAll();
         //calculate popularScore
         for (JobOfferEntity jo :
@@ -46,7 +48,11 @@ public class JobOfferService {
         }
         //sort lai theo popularScore DESC
         list.sort(((o1, o2) -> o2.getPopularScore().compareTo(o1.getPopularScore())));
-        return list;
+        if (quantity==0 || quantity>= list.size())
+            return list;
+        else{
+            return list.subList(0, quantity);
+        }
     }
 
 }

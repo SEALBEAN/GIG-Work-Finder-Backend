@@ -17,19 +17,31 @@ public class JobOfferController {
     @GetMapping("/ID/{id}")
     public JobOfferEntity getByOfferID(@PathVariable int id) {return jobOfferService.findByOfferID(id);}
 
-    @RequestMapping(value = { "/ALL"})
+    @GetMapping(value = { "/ALL"})
     @ResponseBody
     public List<JobOfferEntity> getAllJobOffers(@RequestParam(required = false) Integer limit) {
         if (limit == null)
-            return jobOfferService.getAllJobOffers();
+            return jobOfferService.getAllJobOffers(0);
         else
             return jobOfferService.getAllJobOffers(limit);
     }
     @GetMapping("/GetHurry")
-    public List<JobOfferEntity> getHurryJobOffers(){return jobOfferService.getHurryJobOffers();}
+    @ResponseBody
+    public List<JobOfferEntity> getHurryJobOffers(@RequestParam(required = false) Integer limit){
+        if (limit == null)
+            return jobOfferService.getHurryJobOffers(0);
+        else
+            return jobOfferService.getHurryJobOffers(limit);
+    }
 
     @GetMapping("/GetPopular")
-    public List<JobOfferEntity> getPopularJobOffers() {return jobOfferService.getPopularJobOffers();}
+    @ResponseBody
+    public List<JobOfferEntity> getPopularJobOffers(@RequestParam(required = false) Integer limit) {
+        if (limit == null)
+            return jobOfferService.getPopularJobOffers(0);
+        else
+            return jobOfferService.getPopularJobOffers(limit);
+    }
 
 
 }
