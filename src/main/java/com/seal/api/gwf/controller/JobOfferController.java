@@ -17,12 +17,13 @@ public class JobOfferController {
     @GetMapping("/ID/{id}")
     public JobOfferEntity getByOfferID(@PathVariable int id) {return jobOfferService.findByOfferID(id);}
 
-    @RequestMapping(value = { "/ALL","/ALL/{quantity}"})
-    public List<JobOfferEntity> getAllJobOffers(@PathVariable(required = false) Integer quantity) {
-        if (quantity == null)
-        return jobOfferService.getAllJobOffers();
+    @RequestMapping(value = { "/ALL"})
+    @ResponseBody
+    public List<JobOfferEntity> getAllJobOffers(@RequestParam(required = false) Integer limit) {
+        if (limit == null)
+            return jobOfferService.getAllJobOffers();
         else
-            return jobOfferService.getAllJobOffers(quantity);
+            return jobOfferService.getAllJobOffers(limit);
     }
     @GetMapping("/GetHurry")
     public List<JobOfferEntity> getHurryJobOffers(){return jobOfferService.getHurryJobOffers();}
