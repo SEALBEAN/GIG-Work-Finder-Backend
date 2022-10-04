@@ -22,7 +22,7 @@ public class JobOfferController {
         if (quantity == null)
         return jobOfferService.getAllJobOffers();
         else
-            return jobOfferService.getAllJobOffers(1);
+            return jobOfferService.getAllJobOffers(quantity);
     }
     @GetMapping("/GetHurry")
     public List<JobOfferEntity> getHurryJobOffers(){return jobOfferService.getHurryJobOffers();}
