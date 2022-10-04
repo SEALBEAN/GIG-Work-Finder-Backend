@@ -20,6 +20,7 @@ public class JobApplicationEntity {
 
     @Id
     @Column(name = "ApplicationID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int applicationID;
 
     @Column(name = "AccountID")
@@ -34,13 +35,13 @@ public class JobApplicationEntity {
     private Date endDate;
 
     @Column(name = "Salary")
-    private int salary;
+    private Integer salary;
 
     @Column(name = "Age")
     private int age;
 
     @Column(name = "Visual")
-    private int visual;
+    private Integer visual;
 
     @Column(name = "Other")
     private int other;

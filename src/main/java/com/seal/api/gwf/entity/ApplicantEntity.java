@@ -19,6 +19,7 @@ import java.util.Date;
 public class ApplicantEntity {
     @Id
     @Column(name = "AccountID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int accountID;
 
     @Column(name = "LocationID")

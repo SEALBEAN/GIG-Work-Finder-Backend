@@ -20,6 +20,7 @@ public class ReviewDetailEntity {
 
     @Id
     @Column(name = "ReviewID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reviewID;
 
     @Column(name = "AccountID")

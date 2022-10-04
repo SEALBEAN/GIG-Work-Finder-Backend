@@ -19,6 +19,7 @@ import java.util.Date;
 public class JobOfferEntity {
     @Id
     @Column(name = "OfferID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int offerID;
 
     @Column(name = "AccountID", nullable = false)

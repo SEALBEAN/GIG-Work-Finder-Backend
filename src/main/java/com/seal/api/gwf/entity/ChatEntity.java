@@ -17,6 +17,7 @@ import java.util.Date;
 public class ChatEntity {
     @Id
     @Column(name = "ChatID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int chatID;
 
     @Column(name = "AccountID")

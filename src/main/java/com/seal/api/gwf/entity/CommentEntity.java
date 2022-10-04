@@ -19,6 +19,7 @@ public class CommentEntity {
 
     @Id
     @Column(name = "CommentID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int commentID;
 
     @Column(name = "OfferID")
