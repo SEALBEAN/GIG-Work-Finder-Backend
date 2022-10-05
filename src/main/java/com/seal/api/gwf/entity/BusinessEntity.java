@@ -1,6 +1,7 @@
 package com.seal.api.gwf.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +23,13 @@ public class BusinessEntity {
 
     private int businessID;
 
-    @Column(name = "LocationID")
-    private int locationID;
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "LocationID")
+    private LocationEntity location;
+
+//    @Column(name = "LocationID")
+//    private int locationID;
 
     @Column(name = "AccountID")
     private int accountID;

@@ -24,4 +24,7 @@ public class DegreeEntity {
     @Column(name = "DegreeName", columnDefinition = "ntext")
     private String degreeName;
 
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "DegreeID")
+//    private
+
 }

@@ -1,5 +1,6 @@
 package com.seal.api.gwf.service;
 
+import com.seal.api.gwf.entity.LocationEntity;
 import com.seal.api.gwf.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ public class LocationService {
     @Autowired
     LocationRepository locationRepository;
 
+    public LocationEntity getByID(int id) {return  locationRepository.findById(id).get();}
     public List<String> getAllProvince() {return locationRepository.getAllProvince();}
 
     public List<String> getCitysByProvince(String province) {return locationRepository.getCitysByProvince(province);}
