@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'Gig-worker-backend'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_979AC0B1F3E54E1DB6F1C49E6F73B3F2 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3FEC9479298F4BCCAD5E0B12DA0CA259 }}
           package: '*.jar'
