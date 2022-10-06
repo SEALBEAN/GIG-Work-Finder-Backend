@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Location {
-    private String province;
-    private String city;
+public class Degree {
+    private String degreeName;
 }

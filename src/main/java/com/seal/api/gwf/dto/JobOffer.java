@@ -18,15 +18,15 @@ public class JobOffer {
 
     private int offerID;
 
-    private RecruiterEntity recruiter;
+    private Recruiter recruiter;
 
-    private JobTypeEntity jobType;
+    private JobType jobType;
 
     private Location location;
 
-    private DegreeEntity degree;
+    private Degree degree;
 
-    private BusinessEntity business;
+    private Business business;
 
     private int numOfRecruit;
 
