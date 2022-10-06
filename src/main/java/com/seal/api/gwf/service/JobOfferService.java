@@ -1,7 +1,9 @@
 package com.seal.api.gwf.service;
 
+import com.seal.api.gwf.dto.JobOffer;
 import com.seal.api.gwf.entity.JobOfferEntity;
 import com.seal.api.gwf.repository.JobOfferRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,13 @@ public class JobOfferService {
 
     @Autowired
     JobOfferRepository jobOfferRepository;
+    @Autowired
+    private ModelMapper mapper;
 
-    public JobOfferEntity findByOfferID(int ID) { return jobOfferRepository.findByOfferID(ID);}
+    public JobOffer findByOfferID(int ID) {
+        JobOfferEntity jo =  jobOfferRepository.findByOfferID(ID);
+        return mapper.map(jo, JobOffer.class);
+    }
 
     public List<JobOfferEntity> getAllJobOffers(int quantity){
         List<JobOfferEntity> list = jobOfferRepository.getAll();

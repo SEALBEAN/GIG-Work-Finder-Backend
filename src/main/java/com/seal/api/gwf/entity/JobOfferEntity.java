@@ -34,7 +34,6 @@ public class JobOfferEntity {
     private JobTypeEntity jobType;
 
     @ManyToOne(fetch = FetchType.EAGER)
-
     @JoinColumn(name = "LocationID")
     private LocationEntity location;
 

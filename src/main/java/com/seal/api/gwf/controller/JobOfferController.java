@@ -1,5 +1,6 @@
 package com.seal.api.gwf.controller;
 
+import com.seal.api.gwf.dto.JobOffer;
 import com.seal.api.gwf.entity.JobOfferEntity;
 import com.seal.api.gwf.service.JobOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class JobOfferController {
     JobOfferService jobOfferService;
 
     @GetMapping("/ID/{id}")
-    public JobOfferEntity getByOfferID(@PathVariable int id) {return jobOfferService.findByOfferID(id);}
+    public JobOffer getByOfferID(@PathVariable int id) {return jobOfferService.findByOfferID(id);}
 
     @GetMapping(value = { "/ALL"})
     @ResponseBody

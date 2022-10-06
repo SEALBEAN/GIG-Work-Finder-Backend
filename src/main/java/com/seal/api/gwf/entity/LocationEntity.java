@@ -20,8 +20,6 @@ import java.util.Set;
 @Table(name = "Location")
 //@JsonIgnoreProperties({"businessEntityList"})
 public class LocationEntity {
-
-
     @Id
     @Column(name = "LocationID")
     private int locationID;
@@ -35,5 +33,4 @@ public class LocationEntity {
     @JsonManagedReference
     @OneToMany(mappedBy = "location",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = BusinessEntity.class)
     private Set<BusinessEntity> businessEntityList = new HashSet<>();
-
 }
