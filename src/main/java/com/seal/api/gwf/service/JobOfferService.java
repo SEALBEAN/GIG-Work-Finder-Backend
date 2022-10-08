@@ -18,13 +18,24 @@ public class JobOfferService {
     @Autowired
     private ModelMapper mapper;
 
+    //Test Entity
+    public JobOfferEntity getByID(int ID){
+        return jobOfferRepository.findByOfferID(ID);
+    }
+
+
     public JobOffer findByOfferID(int ID) {
         JobOfferEntity jo =  jobOfferRepository.findByOfferID(ID);
         return mapper.map(jo, JobOffer.class);
     }
 
-    public List<JobOfferEntity> getAllJobOffers(int quantity){
-        List<JobOfferEntity> list = jobOfferRepository.getAll();
+    public List<JobOffer> getAllJobOffers(int quantity){
+        ArrayList<JobOfferEntity> jo = (ArrayList<JobOfferEntity>) jobOfferRepository.getAll();
+        ArrayList<JobOffer> list = new ArrayList<>();
+        for (JobOfferEntity j :
+                jo) {
+            list.add(mapper.map(j, JobOffer.class));
+        }
         int max = list.size();
         if (quantity>=max || quantity == 0)
             return list;
@@ -36,8 +47,13 @@ public class JobOfferService {
         return list;
     }
 
-    public List<JobOfferEntity> getHurryJobOffers(int quantity){
-        ArrayList<JobOfferEntity> list = (ArrayList<JobOfferEntity>) jobOfferRepository.getHurryJobOffer();
+    public List<JobOffer> getHurryJobOffers(int quantity){
+        ArrayList<JobOfferEntity> jo = (ArrayList<JobOfferEntity>) jobOfferRepository.getHurryJobOffer();
+        ArrayList<JobOffer> list = new ArrayList<>();
+        for (JobOfferEntity j :
+                jo) {
+            list.add(mapper.map(j, JobOffer.class));
+        }
         if (quantity==0 || quantity>= list.size())
             return list;
         else{
@@ -46,12 +62,17 @@ public class JobOfferService {
     }
 
 
-    public List<JobOfferEntity> getPopularJobOffers(int quantity){
-        ArrayList<JobOfferEntity> list = (ArrayList<JobOfferEntity>) jobOfferRepository.getAll();
+    public List<JobOffer> getPopularJobOffers(int quantity){
+        ArrayList<JobOfferEntity> jo = (ArrayList<JobOfferEntity>) jobOfferRepository.getAll();
+        ArrayList<JobOffer> list = new ArrayList<>();
+        for (JobOfferEntity j :
+                jo) {
+            list.add(mapper.map(j, JobOffer.class));
+        }
         //calculate popularScore
-        for (JobOfferEntity jo :
+        for (JobOffer j :
                 list) {
-            jo.setPopularScore(jobOfferRepository.calPopularScore(jo.getOfferID()));
+            j.setPopularScore(jobOfferRepository.calPopularScore(j.getOfferID()));
         }
         //sort lai theo popularScore DESC
         list.sort(((o1, o2) -> o2.getPopularScore().compareTo(o1.getPopularScore())));

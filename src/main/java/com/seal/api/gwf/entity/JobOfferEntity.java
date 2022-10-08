@@ -1,6 +1,7 @@
 package com.seal.api.gwf.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class JobOfferEntity {
     @JoinColumn(name = "AccountID")
     private RecruiterEntity recruiter;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "TypeID")
     private JobTypeEntity jobType;
