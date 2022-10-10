@@ -29,6 +29,11 @@ public class JobOfferService {
         return mapper.map(jo, JobOffer.class);
     }
 
+    public JobOffer findByBusinessID(int ID) {
+        JobOfferEntity jo =  jobOfferRepository.findByBusinessID(ID);
+        return mapper.map(jo, JobOffer.class);
+    }
+
     public List<JobOffer> getAllJobOffers(int quantity){
         ArrayList<JobOfferEntity> jo = (ArrayList<JobOfferEntity>) jobOfferRepository.getAll();
         ArrayList<JobOffer> list = new ArrayList<>();
