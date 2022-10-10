@@ -30,7 +30,7 @@ public class LocationEntity {
     @Column(name = "City")
     private String city;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "location",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = BusinessEntity.class)
-    private Set<BusinessEntity> businessEntityList = new HashSet<>();
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "location",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = BusinessEntity.class)
+//    private Set<BusinessEntity> businessEntityList = new HashSet<>();
 }

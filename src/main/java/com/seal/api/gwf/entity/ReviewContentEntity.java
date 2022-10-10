@@ -15,12 +15,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "ReviewContent")
-public class ReviewContentEntity {
+public class ReviewContentEntity{
 
     @Id
     @Column(name = "ContentID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int contentID;
+
 
     @Column(name = "ReviewID")
     private int reviewID;

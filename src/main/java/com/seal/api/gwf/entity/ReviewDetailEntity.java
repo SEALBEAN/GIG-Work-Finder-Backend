@@ -1,13 +1,16 @@
 package com.seal.api.gwf.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.seal.api.gwf.dto.ReviewDetail;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Getter
@@ -22,6 +25,7 @@ public class ReviewDetailEntity {
     @Column(name = "ReviewID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reviewID;
+
 
     @Column(name = "AccountID")
     private int accountID;
@@ -40,6 +44,12 @@ public class ReviewDetailEntity {
     @Column(name = "Status")
     private int status;
 
-    @Column(name = "CreatedByID")
-    private int createdByID;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = ApplicantEntity.class)
+    @JoinColumn(name = "CreatedByID", referencedColumnName = "AccountID")
+    private ApplicantEntity createdBy;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "reviewID",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = ReviewContentEntity.class)
+    private Set<ReviewContentEntity> reviewContentEntities = new HashSet<>();
 }

@@ -1,12 +1,17 @@
 package com.seal.api.gwf.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.seal.api.gwf.dto.Recruiter;
+import com.seal.api.gwf.dto.ReviewDetail;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Getter
@@ -51,5 +56,9 @@ public class RecruiterEntity {
 
     @Column(name = "Description", columnDefinition = "ntext")
     private String description;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "accountID",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = ReviewDetailEntity.class)
+    private Set<ReviewDetailEntity> reviewDetailEntities = new HashSet<>();
 
 }
