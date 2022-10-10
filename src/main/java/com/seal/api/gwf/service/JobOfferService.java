@@ -29,9 +29,15 @@ public class JobOfferService {
         return mapper.map(jo, JobOffer.class);
     }
 
-    public JobOffer findByBusinessID(int ID) {
-        JobOfferEntity jo =  jobOfferRepository.findByBusinessID(ID);
-        return mapper.map(jo, JobOffer.class);
+    public List<JobOffer> findByBusinessID(int ID) {
+
+        List<JobOfferEntity> jo = jobOfferRepository.findByBusinessID(ID);
+        ArrayList<JobOffer> list = new ArrayList<>();
+        for (JobOfferEntity j :
+                jo) {
+            list.add(mapper.map(j, JobOffer.class));
+        }
+        return list;
     }
 
     public List<JobOffer> getAllJobOffers(int quantity){

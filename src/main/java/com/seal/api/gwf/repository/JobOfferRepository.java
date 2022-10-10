@@ -19,7 +19,7 @@ public interface JobOfferRepository extends JpaRepository <JobOfferEntity, Integ
     JobOfferEntity findByOfferID(int ID);
 
     @Query(value = "SELECT * FROM JobOffer WHERE BusinessID = ?1 AND Status = 1", nativeQuery = true)
-    JobOfferEntity findByBusinessID(int id);
+    List<JobOfferEntity> findByBusinessID(int id);
 
     @Query(value = "SELECT * FROM dbo.FN_HurryJobOffer()", nativeQuery = true)
     List<JobOfferEntity> getHurryJobOffer();

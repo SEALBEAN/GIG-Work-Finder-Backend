@@ -26,7 +26,7 @@ public class JobOfferController {
     public JobOffer getByOfferID(@PathVariable int id) {return jobOfferService.findByOfferID(id);}
 
     @GetMapping("/BusinessID/{id}")
-    public JobOffer getByBusinessID(@PathVariable int id) {return jobOfferService.findByBusinessID(id);}
+    public List<JobOffer> getByBusinessID(@PathVariable int id) {return jobOfferService.findByBusinessID(id);}
 
     @GetMapping(value = { "/ALL"})
     @ResponseBody
