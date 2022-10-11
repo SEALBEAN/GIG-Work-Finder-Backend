@@ -12,6 +12,6 @@ import java.util.List;
 public interface DegreeRepository extends JpaRepository<DegreeEntity, Integer> {
 
     @Query(value = "SELECT * FROM Degree", nativeQuery = true)
-    List<DegreeName> getAllDegreeName();
+    List<DegreeEntity> getAllDegreeName();
 
 }
