@@ -16,6 +16,6 @@ public interface JobTypeRepository extends JpaRepository<JobTypeEntity, Integer>
     List<JobTypeEntity> getPopularJobType();
 
     @Query(value = "SELECT TypeID, Name FROM JobType WHERE Status = 1", nativeQuery = true)
-    List<JobName> getAllJobTypeNames();
+    List<JobTypeEntity> getAllJobTypeNames();
 
 }
