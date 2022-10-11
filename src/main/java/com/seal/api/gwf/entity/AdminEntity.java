@@ -24,14 +24,19 @@ public class AdminEntity {
     @Column(name = "AccountID")
     private int accountID;
 
-    @Column(name = "UserName")
-    private String userName;
+    @Column(name = "FirstName")
+    private String firstName;
 
-    @Column(name = "Password")
-    private String password;
+    @Column(name = "LastName")
+    private String lastName;
 
-    @Column(name = "Name")
-    private String name;
+    @Column(name = "Gender")
+    private String gender;
 
+    @Column(name = "Email")
+    private String email;
+
+    @Column(name = "Status")
+    private int status;
 
 }
