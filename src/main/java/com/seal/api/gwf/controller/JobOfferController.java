@@ -1,10 +1,14 @@
 package com.seal.api.gwf.controller;
 
 import com.seal.api.gwf.dto.JobOffer;
+import com.seal.api.gwf.dto.create.JobOfferForm;
 import com.seal.api.gwf.entity.JobOfferEntity;
 import com.seal.api.gwf.service.CreateJOService;
 import com.seal.api.gwf.service.JobOfferService;
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -63,5 +67,8 @@ public class JobOfferController {
     }
 
     @PostMapping("/CreateJO")
-    public void createJO() {return;}
+    public ResponseEntity createJO(@ModelAttribute JobOfferForm joe) {
+        System.out.println(joe);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 }
