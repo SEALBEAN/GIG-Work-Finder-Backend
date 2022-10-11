@@ -62,5 +62,6 @@ public class JobOfferController {
         return createJOService.getInfo(id);
     }
 
-
+    @PostMapping("/CreateJO")
+    public void createJO() {return;}
 }
