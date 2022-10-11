@@ -1,5 +1,6 @@
 package com.seal.api.gwf.repository;
 
+import com.seal.api.gwf.dto.create.BusinessAddress;
 import com.seal.api.gwf.entity.BusinessEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +15,7 @@ public interface BusinessRepository extends JpaRepository<BusinessEntity, Intege
 
     @Query(value = "SELECT * FROM Business",nativeQuery = true)
     List<BusinessEntity> getAll();
+
+    @Query(value = "SELECT BusinessID, Address FROM Business WHERE AccountID = ?1", nativeQuery = true)
+    List<BusinessAddress> getAllBusinessAddress(int id);
 }

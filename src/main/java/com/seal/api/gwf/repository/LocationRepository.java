@@ -1,5 +1,6 @@
 package com.seal.api.gwf.repository;
 
+import com.seal.api.gwf.dto.create.City;
 import com.seal.api.gwf.entity.LocationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,5 +14,5 @@ public interface LocationRepository extends JpaRepository<LocationEntity, Intege
     List<String> getAllProvince();
 
     @Query(value = "SELECT * FROM dbo.FN_ListCity(?1)", nativeQuery = true)
-    List<String> getCitysByProvince(String province);
+    List<City> getCitysByProvince(String province);
 }

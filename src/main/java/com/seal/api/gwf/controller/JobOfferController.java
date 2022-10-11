@@ -2,6 +2,7 @@ package com.seal.api.gwf.controller;
 
 import com.seal.api.gwf.dto.JobOffer;
 import com.seal.api.gwf.entity.JobOfferEntity;
+import com.seal.api.gwf.service.CreateJOService;
 import com.seal.api.gwf.service.JobOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ public class JobOfferController {
 
     @Autowired
     JobOfferService jobOfferService;
+    @Autowired
+    CreateJOService createJOService;
 
     //Test Entity
     @GetMapping("/Test/{id}")
@@ -52,6 +55,11 @@ public class JobOfferController {
             return jobOfferService.getPopularJobOffers(0);
         else
             return jobOfferService.getPopularJobOffers(limit);
+    }
+
+    @GetMapping("/CreateJO/{id}")
+    public CreateJOService.CreateJO getInfo(@PathVariable int id){
+        return createJOService.getInfo(id);
     }
 
 

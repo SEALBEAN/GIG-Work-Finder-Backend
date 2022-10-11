@@ -1,5 +1,6 @@
 package com.seal.api.gwf.controller;
 
+import com.seal.api.gwf.dto.create.JobName;
 import com.seal.api.gwf.entity.JobTypeEntity;
 import com.seal.api.gwf.service.JobTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,11 @@ public class JobTypeController {
             return jobTypeService.getPopularJobType(10);
         else
             return jobTypeService.getPopularJobType(limit);
+    }
+
+    @GetMapping("/GetName")
+    @ResponseBody
+    public List<JobName> getAllJobTypeNames() {
+            return jobTypeService.getAllJobTypeNames();
     }
 }

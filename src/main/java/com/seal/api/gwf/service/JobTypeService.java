@@ -1,6 +1,7 @@
 package com.seal.api.gwf.service;
 
 
+import com.seal.api.gwf.dto.create.JobName;
 import com.seal.api.gwf.entity.JobTypeEntity;
 import com.seal.api.gwf.repository.JobTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,9 @@ public class JobTypeService {
             return list;
         else
             return list.subList(0, quantity);
+    }
+
+    public List<JobName> getAllJobTypeNames(){
+        return jobTypeRepository.getAllJobTypeNames();
     }
 }

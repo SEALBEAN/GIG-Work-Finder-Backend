@@ -12,6 +12,8 @@ import lombok.Setter;
 public class Business {
     private int businessID;
 
+    private int accountID;
+
     private Location location;
 
     private String address;

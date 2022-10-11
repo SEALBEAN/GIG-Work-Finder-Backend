@@ -1,5 +1,6 @@
 package com.seal.api.gwf.controller;
 
+import com.seal.api.gwf.dto.create.City;
 import com.seal.api.gwf.entity.LocationEntity;
 import com.seal.api.gwf.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,5 @@ public class LocationController {
     public List<String> getAllProvince() {return locationService.getAllProvince();}
 
     @GetMapping("/City/{province}")
-    public List<String> getCitysByProvince(@PathVariable String province) {return locationService.getCitysByProvince(province);}
+    public List<City> getCitysByProvince(@PathVariable String province) {return locationService.getCitysByProvince(province);}
 }

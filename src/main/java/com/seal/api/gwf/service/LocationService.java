@@ -1,5 +1,6 @@
 package com.seal.api.gwf.service;
 
+import com.seal.api.gwf.dto.create.City;
 import com.seal.api.gwf.entity.LocationEntity;
 import com.seal.api.gwf.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,5 +16,5 @@ public class LocationService {
     public LocationEntity getByID(int id) {return  locationRepository.findById(id).get();}
     public List<String> getAllProvince() {return locationRepository.getAllProvince();}
 
-    public List<String> getCitysByProvince(String province) {return locationRepository.getCitysByProvince(province);}
+    public List<City> getCitysByProvince(String province) {return locationRepository.getCitysByProvince(province);}
 }
