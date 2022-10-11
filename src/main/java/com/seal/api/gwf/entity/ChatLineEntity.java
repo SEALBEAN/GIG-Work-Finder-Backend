@@ -19,6 +19,7 @@ public class ChatLineEntity {
 
     @Id
     @Column(name = "LineID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int lineID;
 
     @Column(name = "ChatID")

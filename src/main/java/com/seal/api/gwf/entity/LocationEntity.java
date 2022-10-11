@@ -1,15 +1,15 @@
 package com.seal.api.gwf.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Getter
@@ -18,8 +18,8 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "Location")
+//@JsonIgnoreProperties({"businessEntityList"})
 public class LocationEntity {
-
     @Id
     @Column(name = "LocationID")
     private int locationID;
@@ -30,4 +30,7 @@ public class LocationEntity {
     @Column(name = "City")
     private String city;
 
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "location",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = BusinessEntity.class)
+//    private Set<BusinessEntity> businessEntityList = new HashSet<>();
 }

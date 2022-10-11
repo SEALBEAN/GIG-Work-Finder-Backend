@@ -1,6 +1,7 @@
 package com.seal.api.gwf.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,13 +20,17 @@ import java.util.Date;
 public class ApplicantEntity {
     @Id
     @Column(name = "AccountID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int accountID;
 
-    @Column(name = "LocationID")
-    private Integer locationID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "LocationID")
+    private LocationEntity location;
 
-    @Column(name = "DegreeID")
-    private Integer degreeID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "DegreeID")
+    private DegreeEntity degree;
+
 
     @Column(name = "FirstName")
     private String firstName;
@@ -63,4 +68,13 @@ public class ApplicantEntity {
 
     @Column(name = "Description", columnDefinition = "ntext")
     private String description;
+
+    //Ktra lai. ?
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "jobOffer",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = CommentEntity.class)
+//    private Set<CommentEntity> commentEntities = new HashSet<>();
+
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "createdBy",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = ReviewDetailEntity.class)
+//    private Set<ReviewDetailEntity> reviewDetailEntities = new HashSet<>();
 }

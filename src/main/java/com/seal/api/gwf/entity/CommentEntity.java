@@ -1,6 +1,7 @@
 package com.seal.api.gwf.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,10 +20,13 @@ public class CommentEntity {
 
     @Id
     @Column(name = "CommentID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int commentID;
 
-    @Column(name = "OfferID")
-    private int offerID;
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "OfferID")
+    private JobOfferEntity jobOffer;
 
     @Column(name = "CreatedByID")
     private int createdByID;

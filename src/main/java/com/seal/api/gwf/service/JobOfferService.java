@@ -1,7 +1,9 @@
 package com.seal.api.gwf.service;
 
+import com.seal.api.gwf.dto.JobOffer;
 import com.seal.api.gwf.entity.JobOfferEntity;
 import com.seal.api.gwf.repository.JobOfferRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,35 +15,83 @@ public class JobOfferService {
 
     @Autowired
     JobOfferRepository jobOfferRepository;
+    @Autowired
+    private ModelMapper mapper;
 
-    public JobOfferEntity findByOfferID(int ID) { return jobOfferRepository.findByOfferID(ID);}
-
-    public List<JobOfferEntity> findByLocationID(int ID){
-        return jobOfferRepository.findByLocationID(ID);
+    //Test Entity
+    public JobOfferEntity getByID(int ID){
+        return jobOfferRepository.findByOfferID(ID);
     }
 
-    public List<JobOfferEntity> findByAccountID(int ID){
-        return jobOfferRepository.findByAccountID(ID);
+
+    public JobOffer findByOfferID(int ID) {
+        JobOfferEntity jo =  jobOfferRepository.findByOfferID(ID);
+        return mapper.map(jo, JobOffer.class);
     }
 
-    public List<JobOfferEntity> getAllJobOffers() {
-        return jobOfferRepository.findAll();
+    public List<JobOffer> findByBusinessID(int ID) {
+
+        List<JobOfferEntity> jo = jobOfferRepository.findByBusinessID(ID);
+        ArrayList<JobOffer> list = new ArrayList<>();
+        for (JobOfferEntity j :
+                jo) {
+            list.add(mapper.map(j, JobOffer.class));
+        }
+        return list;
     }
 
-    public List<JobOfferEntity> getHurryJobOffers(){
-        return jobOfferRepository.getHurryJobOffer();
+    public List<JobOffer> getAllJobOffers(int quantity){
+        ArrayList<JobOfferEntity> jo = (ArrayList<JobOfferEntity>) jobOfferRepository.getAll();
+        ArrayList<JobOffer> list = new ArrayList<>();
+        for (JobOfferEntity j :
+                jo) {
+            list.add(mapper.map(j, JobOffer.class));
+        }
+        int max = list.size();
+        if (quantity>=max || quantity == 0)
+            return list;
+        while (max > quantity){
+            int randomIndex = (int)Math.floor(Math.random()*(max));
+            list.remove(randomIndex);
+            max--;
+        }
+        return list;
     }
 
-    public List<JobOfferEntity> getPopularJobOffers(){
-        ArrayList<JobOfferEntity> list = (ArrayList<JobOfferEntity>) jobOfferRepository.findAll();
+    public List<JobOffer> getHurryJobOffers(int quantity){
+        ArrayList<JobOfferEntity> jo = (ArrayList<JobOfferEntity>) jobOfferRepository.getHurryJobOffer();
+        ArrayList<JobOffer> list = new ArrayList<>();
+        for (JobOfferEntity j :
+                jo) {
+            list.add(mapper.map(j, JobOffer.class));
+        }
+        if (quantity==0 || quantity>= list.size())
+            return list;
+        else{
+            return list.subList(0, quantity);
+        }
+    }
+
+
+    public List<JobOffer> getPopularJobOffers(int quantity){
+        ArrayList<JobOfferEntity> jo = (ArrayList<JobOfferEntity>) jobOfferRepository.getAll();
+        ArrayList<JobOffer> list = new ArrayList<>();
+        for (JobOfferEntity j :
+                jo) {
+            list.add(mapper.map(j, JobOffer.class));
+        }
         //calculate popularScore
-        for (JobOfferEntity jo :
+        for (JobOffer j :
                 list) {
-            jo.setPopularScore(jobOfferRepository.calPopularScore(jo.getOfferID()));
+            j.setPopularScore(jobOfferRepository.calPopularScore(j.getOfferID()));
         }
         //sort lai theo popularScore DESC
         list.sort(((o1, o2) -> o2.getPopularScore().compareTo(o1.getPopularScore())));
-        return list;
+        if (quantity==0 || quantity>= list.size())
+            return list;
+        else{
+            return list.subList(0, quantity);
+        }
     }
 
 }

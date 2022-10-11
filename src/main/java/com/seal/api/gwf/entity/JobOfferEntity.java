@@ -1,6 +1,8 @@
 package com.seal.api.gwf.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +10,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Getter
@@ -19,22 +23,29 @@ import java.util.Date;
 public class JobOfferEntity {
     @Id
     @Column(name = "OfferID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int offerID;
 
-    @Column(name = "AccountID", nullable = false)
-    private int accountID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "AccountID")
+    private RecruiterEntity recruiter;
 
-    @Column(name = "TypeID", nullable = false)
-    private int typeID;
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "TypeID")
+    private JobTypeEntity jobType;
 
-    @Column(name = "LocationID", nullable = false)
-    private int locationID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "LocationID")
+    private LocationEntity location;
 
-    @Column(name = "DegreeID")
-    private Integer degreeID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "DegreeID")
+    private DegreeEntity degree;
 
-    @Column(name = "BusinessID")
-    private Integer businessID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "BusinessID")
+    private BusinessEntity business;
 
     @Column(name = "NumOfRecruit", nullable = false)
     private int numOfRecruit;
@@ -78,4 +89,8 @@ public class JobOfferEntity {
 
     @Column(name = "PopularScore")
     private Float popularScore;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "jobOffer",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = CommentEntity.class)
+    private Set<CommentEntity> commentEntities = new HashSet<>();
 }

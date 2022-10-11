@@ -20,6 +20,7 @@ public class SeenEntity {
 
     @Id
     @Column(name = "SeenID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int seenID;
 
     @Column(name = "LineID")

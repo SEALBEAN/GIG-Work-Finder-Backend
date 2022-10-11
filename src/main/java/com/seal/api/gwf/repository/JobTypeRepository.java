@@ -1,5 +1,6 @@
 package com.seal.api.gwf.repository;
 
+import com.seal.api.gwf.dto.create.JobName;
 import com.seal.api.gwf.entity.JobOfferEntity;
 import com.seal.api.gwf.entity.JobTypeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,7 +13,9 @@ import java.util.List;
 public interface JobTypeRepository extends JpaRepository<JobTypeEntity, Integer> {
 
     @Query(value = "SELECT * FROM dbo.FN_PopularJobType()", nativeQuery = true)
-    public List<JobTypeEntity> getPopularJobType();
+    List<JobTypeEntity> getPopularJobType();
 
+    @Query(value = "SELECT * FROM JobType WHERE Status = 1", nativeQuery = true)
+    List<JobTypeEntity> getAllJobTypeNames();
 
 }
