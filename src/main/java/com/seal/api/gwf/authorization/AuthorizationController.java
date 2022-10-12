@@ -9,10 +9,6 @@ public class AuthorizationController {
 
     @Autowired
     AuthorizationService authorizationService;
-    private class Data{
-        String email;
-        String role;
-    }
     @PostMapping("")
     public String CheckAndCreateAccountAndAccountTokenForAuthorization(@RequestBody Data data){
             return authorizationService.CheckAndAuthorizationWithEmail(data.email, data.role);
