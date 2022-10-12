@@ -8,6 +8,8 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class JobOfferForm {
+    private int accountID;
+
     private int jobType;
 
     private Integer location;
