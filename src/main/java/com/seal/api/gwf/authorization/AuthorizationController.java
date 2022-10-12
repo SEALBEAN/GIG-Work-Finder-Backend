@@ -11,6 +11,6 @@ public class AuthorizationController {
     AuthorizationService authorizationService;
     @PostMapping("")
     public String CheckAndCreateAccountAndAccountTokenForAuthorization(@RequestBody Data data){
-            return authorizationService.CheckAndAuthorizationWithEmail(data.email, data.role);
+            return authorizationService.CheckAndAuthorizationWithEmail(data.email, data.role, data.picUrl);
     }
 }

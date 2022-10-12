@@ -28,13 +28,13 @@ public class AuthorizationService {
     CryptionService cryptionService;
 
 
-    public String CheckAndAuthorizationWithEmail(String email, String role){
+    public String CheckAndAuthorizationWithEmail(String email, String role, String picUrl){
         String result = "";
         // check email in Applicant table for applicant role
         Token token = new Token();
         token.setEmail(email);
         token.setRole(role);
-        token.setPicUrl("url");
+        token.setPicUrl(picUrl);
         if ("Recruiter".equals(role)){
             RecruiterEntity recruiterEntity =  recruiterRepository.findByEmail(email);
             token.setName(recruiterEntity.getFirstName() + " " + recruiterEntity.getLastName());

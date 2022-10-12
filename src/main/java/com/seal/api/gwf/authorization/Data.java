@@ -12,4 +12,5 @@ import lombok.Setter;
 public class Data {
         String email;
         String role;
+        String picUrl;
 }
