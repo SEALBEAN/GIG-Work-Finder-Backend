@@ -1,6 +1,7 @@
 package com.seal.api.gwf.service;
 
 import com.seal.api.gwf.dto.JobOffer;
+import com.seal.api.gwf.dto.create.JobOfferForm;
 import com.seal.api.gwf.entity.JobOfferEntity;
 import com.seal.api.gwf.repository.JobOfferRepository;
 import org.modelmapper.ModelMapper;
@@ -94,4 +95,10 @@ public class JobOfferService {
         }
     }
 
+    public void createJO(JobOfferForm joe) {
+        JobOfferEntity jo = mapper.map(joe, JobOfferEntity.class);
+        jobOfferRepository.save(jo);
+        System.out.println(jo);
+        return;
+    }
 }
