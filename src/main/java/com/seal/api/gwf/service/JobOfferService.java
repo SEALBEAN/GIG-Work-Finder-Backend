@@ -96,9 +96,14 @@ public class JobOfferService {
     }
 
     public void createJO(JobOfferForm joe) {
-        JobOfferEntity jo = mapper.map(joe, JobOfferEntity.class);
-        jobOfferRepository.save(jo);
-        System.out.println(jo);
+//        LocalTime t = LocalTime.parse(joe.getStartTime());
+//        Time time = Time.valueOf(t);
+//        System.out.println(time);
+
+        System.out.println(joe.getStartTime());
+//        JobOfferEntity jo = mapper.map(joe, JobOfferEntity.class);
+//        jobOfferRepository.save(jo);
+//        System.out.println(jo);
         return;
     }
 }
