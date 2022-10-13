@@ -13,6 +13,6 @@ public interface LocationRepository extends JpaRepository<LocationEntity, Intege
     @Query(value = "SELECT * FROM dbo.VW_Province",nativeQuery = true)
     List<String> getAllProvince();
 
-    @Query(value = "SELECT * FROM dbo.FN_ListCity(?1)", nativeQuery = true)
+    @Query(value = "SELECT * FROM Location WHERE Province LIKE ?1", nativeQuery = true)
     List<LocationEntity> getCitysByProvince(String province);
 }
