@@ -66,8 +66,16 @@ public class JobOfferController {
     }
 
     @PostMapping("/CreateJO")
-    public ResponseEntity createJO(@ModelAttribute JobOfferForm joe) {
-        jobOfferService.createJO(joe);
-        return ResponseEntity.ok(HttpStatus.OK);
+    public ResponseEntity<?> createJO(@ModelAttribute JobOfferForm joe) {
+        try {
+            Integer result = jobOfferService.createJO(joe);
+            if (result == 1)
+                return ResponseEntity.ok(HttpStatus.OK);
+            else
+                return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
+        }
+
     }
 }

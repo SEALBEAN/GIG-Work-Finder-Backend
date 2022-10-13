@@ -90,4 +90,6 @@ public class JobOfferEntity {
     @JsonManagedReference
     @OneToMany(mappedBy = "jobOffer",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = CommentEntity.class)
     private Set<CommentEntity> commentEntities = new HashSet<>();
+
+
 }

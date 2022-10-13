@@ -8,9 +8,9 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class JobOfferForm {
-    private int accountID;
+    private Integer accountID;
 
-    private int jobType;
+    private Integer jobType;
 
     private Integer location;
 
@@ -18,7 +18,7 @@ public class JobOfferForm {
 
     private Integer business;
 
-    private int numOfRecruit;
+    private Integer numOfRecruit;
 
     private String offerEndTime;
 
