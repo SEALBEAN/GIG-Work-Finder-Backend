@@ -1,6 +1,7 @@
 package com.seal.api.gwf.service;
 
 import com.seal.api.gwf.dto.Business;
+import com.seal.api.gwf.dto.create.BusinessForm;
 import com.seal.api.gwf.entity.BusinessEntity;
 import com.seal.api.gwf.repository.BusinessRepository;
 import org.modelmapper.ModelMapper;
@@ -39,5 +40,11 @@ public class BusinessService {
             max--;
         }
         return list;
+    }
+
+    public Integer createJO(BusinessForm joe) {
+        int result = businessRepository.addJobOffer(joe.getLocation(), joe.getAccountID(), joe.getAddress(), joe.getBusinessName(),
+                joe.getBusinessLogo(), joe.getDescription(), joe.getBenefit());
+        return result;
     }
 }

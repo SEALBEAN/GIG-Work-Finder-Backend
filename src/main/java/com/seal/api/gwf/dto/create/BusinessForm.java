@@ -1,9 +1,15 @@
 package com.seal.api.gwf.dto.create;
 
-import com.seal.api.gwf.entity.LocationEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class BusinessForm {
     private Integer location;
 
