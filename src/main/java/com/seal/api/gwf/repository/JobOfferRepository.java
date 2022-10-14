@@ -32,8 +32,15 @@ public interface JobOfferRepository extends JpaRepository <JobOfferEntity, Integ
     Float calPopularScore(int id);
 
     @Modifying
-    @Query(value = "INSERT INTO JobOffer VALUES (:accountID, :jobType, :location, :degree, :numOfRecruit, :offerEndTime, :createdDate, 0, :salary, :age, 0, :jobDescription, :other, :startTime, :endTime, :address, :business, :popularScore)", nativeQuery = true)
+    @Query(value = "INSERT INTO JobOffer VALUES (:accountID, :jobType, :location, :degree, :numOfRecruit, :offerEndTime, :createdDate, 1, :salary, :age, 0, :jobDescription, :other, :startTime, :endTime, :address, :business, :popularScore)", nativeQuery = true)
     @Transactional
-    int addJobOffer(int accountID, int jobType, Integer location, Integer degree, int numOfRecruit, Timestamp offerEndTime, Timestamp createdDate, Integer salary, Integer age, String jobDescription, String other, Time startTime, Time endTime, String address, Integer business, Integer popularScore);
+    int addJobOffer(int accountID, Integer jobType, Integer location, Integer degree, int numOfRecruit, Timestamp offerEndTime, Timestamp createdDate, Integer salary, Integer age, String jobDescription, String other, Time startTime, Time endTime, String address, Integer business, Integer popularScore);
+
+    @Modifying
+    @Query(value = "UPDATE JobOffer\n" +
+            "SET TypeID = ?2, LocationID = ?3, DegreeID = ?4, NumOfRecruit = ?5, OfferEndTIme = ?6, CreatedDate = ?7, Salary = ?8, Age = ?9, JobDescription = ?10, Other = ?11, StartTime = ?12, EndTime = ?13, Address = ?14, BusinessID = ?15 \n" +
+            "WHERE OfferID = ?1", nativeQuery = true)
+    @Transactional
+    int updateJobOffer(Integer offerID, Integer jobType, Integer location, Integer degree, Integer numOfRecruit, Object offerEndTime, Timestamp createdDate, Integer salary, Integer age, String jobDescription, String other, Time startTime, Time endTime, String address, Integer business);
 
 }
