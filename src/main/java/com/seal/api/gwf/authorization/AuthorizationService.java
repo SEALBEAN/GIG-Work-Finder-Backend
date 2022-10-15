@@ -28,7 +28,7 @@ public class AuthorizationService {
     CryptionService cryptionService;
 
 
-    public String CheckAndAuthorizationWithEmail(String email, String role, String picUrl){
+    public Data CheckAndAuthorizationWithEmail(String email, String role, String picUrl){
         String result = "";
         // check email in Applicant table for applicant role
         Token token = new Token();
@@ -52,6 +52,14 @@ public class AuthorizationService {
             token.setName(adminEntity.getFirstName() + " " + adminEntity.getLastName());
             token.setGender(adminEntity.getGender());
         }
-        return cryptionService.encode(token);
+        //set data
+        String tokenString =  cryptionService.encode(token);
+        Data data = new Data(tokenString);
+        data.setEmail(token.getEmail());
+        data.setRole(token.getRole());
+        data.setName(token.getName());
+        data.setPicUrl(token.getPicUrl());
+        data.setGender(token.getGender());
+        return data;
     }
 }
