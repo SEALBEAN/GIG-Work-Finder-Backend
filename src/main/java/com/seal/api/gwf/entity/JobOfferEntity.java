@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -75,12 +76,10 @@ public class JobOfferEntity {
     private String other;
 
     @Column(name = "StartTime")
-    @Temporal(TemporalType.TIME)
-    private Date startTime;
+    private Time startTime;
 
     @Column(name = "EndTime")
-    @Temporal(TemporalType.TIME)
-    private Date endTime;
+    private Time endTime;
 
     @Column(name = "Address", columnDefinition = "ntext")
     private String address;
@@ -91,4 +90,6 @@ public class JobOfferEntity {
     @JsonManagedReference
     @OneToMany(mappedBy = "jobOffer",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = CommentEntity.class)
     private Set<CommentEntity> commentEntities = new HashSet<>();
+
+
 }
