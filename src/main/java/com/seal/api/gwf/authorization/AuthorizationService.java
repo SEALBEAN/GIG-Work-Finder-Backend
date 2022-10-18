@@ -35,6 +35,7 @@ public class AuthorizationService {
         token.setEmail(email);
         token.setRole(role);
         token.setPicUrl(picUrl);
+        System.out.println(token);
         if ("Recruiter".equals(role)){
             RecruiterEntity recruiterEntity =  recruiterRepository.findByEmail(email);
             token.setName(recruiterEntity.getFirstName() + " " + recruiterEntity.getLastName());

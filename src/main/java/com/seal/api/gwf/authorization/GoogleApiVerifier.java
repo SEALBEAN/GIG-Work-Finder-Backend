@@ -6,7 +6,6 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
-import com.seal.api.gwf.authorization.ecrytion.Token;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -19,12 +18,12 @@ public class GoogleApiVerifier {
         public static Data VerifyGoogleToken(String idTokenString) throws GeneralSecurityException, IOException {
                 HttpTransport transport = new NetHttpTransport();
                 JsonFactory jsonFactory = new GsonFactory();
-                Data data = new Data();
+                Data data = null;
 
 
                 GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
                         // Specify the CLIENT_ID of the app that accesses the backend:
-                        .setAudience(Collections.singletonList("1007068028201-crhuod27h49ju3c3fik4mibqu96pecpf.apps.googleusercontent.com"))
+                        .setAudience(Collections.singletonList("113868114805676880830"))
                         // Or, if multiple clients access the backend:
                         //.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
                         .build();
@@ -33,6 +32,7 @@ public class GoogleApiVerifier {
                 if (idTokenString != null) {
                         GoogleIdToken idToken = verifier.verify(idTokenString);
                         if (idToken != null) {
+                                data = new Data();
                                 Payload payload = idToken.getPayload();
 
                                 // Print user identifier
@@ -41,12 +41,12 @@ public class GoogleApiVerifier {
 
                                 // Get profile information from payload
                                 data.setEmail(payload.getEmail());
-                                boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+//                                boolean emailVerified = payload.getEmailVerified();
                                 data.setName((String) payload.get("name"));
                                 data.setPicUrl((String) payload.get("picture"));
-                                String locale = (String) payload.get("locale");
-                                String familyName = (String) payload.get("family_name");
-                                String givenName = (String) payload.get("given_name");
+//                                String locale = (String) payload.get("locale");
+//                                String familyName = (String) payload.get("family_name");
+//                                String givenName = (String) payload.get("given_name");
 
                                 // Use or store profile information
                                 // ...
