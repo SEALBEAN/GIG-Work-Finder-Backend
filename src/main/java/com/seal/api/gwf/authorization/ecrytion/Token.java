@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Token {
+    private int id;
     private String email;
     private String role;
     private String name;

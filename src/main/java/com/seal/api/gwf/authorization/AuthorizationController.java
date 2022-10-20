@@ -16,8 +16,9 @@ public class AuthorizationController {
     AuthorizationService authorizationService;
     @PostMapping("")
     public ResponseEntity<?> CheckAndCreateAccountAndAccountTokenForAuthorization(@RequestBody Data data){
-//        Data googleData;
-//        String idTokenString = data.getToken().replace("Bearer ", "");
+        Data googleData;
+        String idTokenString = data.getToken().replace("Bearer ", "");
+
 //        try {
 //            googleData = GoogleApiVerifier.VerifyGoogleToken(idTokenString);
 //        } catch (IOException exception){
@@ -25,7 +26,6 @@ public class AuthorizationController {
 //        } catch (GeneralSecurityException exception){
 //            return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("GeneralSecurityException!");
 //        }
-//        System
 //        if (googleData == null ) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Fail idToken!");
 //        else
             return ResponseEntity.ok(authorizationService.CheckAndAuthorizationWithEmail(data.getEmail(), data.getRole(), data.getPicUrl()));

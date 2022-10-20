@@ -86,11 +86,13 @@ public class CryptionServiceImpl implements CryptionService {
     public String encode(Token token) {
         AES aes = new AES(AES_KEY);
         Claims claims = Jwts.claims();
+        claims.put("id",token.getId());
         claims.put("email",token.getEmail());
         //we are encypting the userRefer using cipher
         claims.put("name",token.getName());
         claims.put("role",token.getRole());
         claims.put("picUrl",token.getPicUrl());
+        claims.put("gender",token.getGender());
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -107,12 +109,13 @@ public class CryptionServiceImpl implements CryptionService {
                 .setSigningKey(secret_key.getBytes(StandardCharsets.UTF_8))
                 .parseClaimsJws(tokenSource)
                 .getBody();
-
         Token token= new Token();
+        token.setId(Integer.parseInt(body.get("id").toString()));
         token.setEmail(String.valueOf(body.get("email")));
         token.setName(String.valueOf(body.get("name")));
         token.setRole(String.valueOf(body.get("role")));
         token.setPicUrl(String.valueOf(body.get("picUrl")));
+        token.setGender(String.valueOf(body.get("gender")));
         return token;
     }
 

@@ -38,24 +38,28 @@ public class AuthorizationService {
         System.out.println(token);
         if ("Recruiter".equals(role)){
             RecruiterEntity recruiterEntity =  recruiterRepository.findByEmail(email);
+            token.setId(recruiterEntity.getAccountID());
             token.setName(recruiterEntity.getFirstName() + " " + recruiterEntity.getLastName());
             token.setGender(recruiterEntity.getGender());
         } else
         if ("Applicant".equals(role))
         {
             ApplicantEntity applicantEntity =  applicantRepository.findByEmail(email);
+            token.setId(applicantEntity.getAccountID());
             token.setName(applicantEntity.getFirstName() + " " + applicantEntity.getLastName());
             token.setGender(applicantEntity.getGender());
         }
         else if ("Admin".equals(role))
         {
             AdminEntity adminEntity =  adminRepository.findByEmail(email);
+            token.setId(adminEntity.getAccountID());
             token.setName(adminEntity.getFirstName() + " " + adminEntity.getLastName());
             token.setGender(adminEntity.getGender());
         }
         //set data
         String tokenString =  cryptionService.encode(token);
         Data data = new Data(tokenString);
+        data.setId(token.getId());
         data.setEmail(token.getEmail());
         data.setRole(token.getRole());
         data.setName(token.getName());
