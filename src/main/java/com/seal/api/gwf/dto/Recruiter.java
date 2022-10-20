@@ -22,6 +22,8 @@ public class Recruiter {
 
     private String phone;
 
+    private String gender;
+
     private String email;
 
     private int totalOfReviews;

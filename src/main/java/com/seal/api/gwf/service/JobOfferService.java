@@ -178,6 +178,9 @@ public class JobOfferService {
         int result = jobOfferRepository.updateJobOffer(joe.getOfferID(), joe.getJobType(), joe.getLocation(), joe.getDegree(), joe.getNumOfRecruit()
                 , offerEndTime, createdDate, joe.getSalary(), joe.getAge(), joe.getJobDescription(), joe.getOther(), startTime, endTime
                 , joe.getAddress(), joe.getBusiness());
-        return 1;
+        return result;
+    }
+
+    public Integer deleteJO(int id) {return jobOfferRepository.deleteByID(id);
     }
 }

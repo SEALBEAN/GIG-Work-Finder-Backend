@@ -21,7 +21,6 @@ public class LocationService {
     public List<String> getAllProvince() {return locationRepository.getAllProvince();}
 
     public List<City> getCitysByProvince(String province) {
-        System.out.println(province);
         List<LocationEntity> location = locationRepository.getCitysByProvince(province);
         ArrayList<City> result = new ArrayList<>();
         for (LocationEntity je:

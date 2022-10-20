@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("RD")
 public class ReviewDetailController {
@@ -15,5 +17,8 @@ public class ReviewDetailController {
     ReviewDetailService reviewDetailService;
 
     @GetMapping("/ID/{id}")
-    public ReviewDetailEntity getByAccountID(@PathVariable int id) {return reviewDetailService.getByID(id);}
+    public ReviewDetailEntity getByID(@PathVariable int id) {return reviewDetailService.getByID(id);}
+
+    @GetMapping("/AID/{id}")
+    public List<ReviewDetailEntity> getByAccountID(@PathVariable int id) {return reviewDetailService.getByAccountID(id);}
 }

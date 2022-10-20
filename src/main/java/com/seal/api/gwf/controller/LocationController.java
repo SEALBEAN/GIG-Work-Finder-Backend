@@ -19,9 +19,8 @@ public class LocationController {
     @GetMapping("/Province/ALL")
     public List<String> getAllProvince() {return locationService.getAllProvince();}
 
-    @PostMapping("/City")
+    @GetMapping("/City")
     public List<City> getCitysByProvince(@RequestParam String province) {
-        System.out.println(province);
         return locationService.getCitysByProvince(province);
     }
 }

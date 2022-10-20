@@ -90,4 +90,17 @@ public class JobOfferController {
 //            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
 //        }
     }
+
+    @DeleteMapping("/DeleteJO/{id}")
+    public ResponseEntity<?> deleteJO(@PathVariable int id){
+//        try{
+        Integer result = jobOfferService.deleteJO(id);
+        if (result == 1)
+            return ResponseEntity.ok(HttpStatus.OK);
+        else
+            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
+//        }catch (Exception e){
+//            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
+//        }
+    }
 }
