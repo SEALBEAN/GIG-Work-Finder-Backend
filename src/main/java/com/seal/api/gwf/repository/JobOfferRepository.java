@@ -32,7 +32,8 @@ public interface JobOfferRepository extends JpaRepository <JobOfferEntity, Integ
     Float calPopularScore(int id);
 
     @Modifying
-    @Query(value = "INSERT INTO JobOffer VALUES (:accountID, :jobType, :location, :degree, :numOfRecruit, :offerEndTime, :createdDate, 1, :salary, :age, 0, :jobDescription, :other, :startTime, :endTime, :address, :business, :popularScore)", nativeQuery = true)
+    @Query(value = "INSERT INTO JobOffer (AccountID, TypeID, LocationID, DegreeID, NumOfRecruit, OfferEndTime, CreatedDate, Salary, Age, Visual, JobDescription, Other, StartTime, EndTime, Address, BusinessID, PopularScore)" +
+            "VALUES (:accountID, :jobType, :location, :degree, :numOfRecruit, :offerEndTime, :createdDate, :salary, :age, 0, :jobDescription, :other, :startTime, :endTime, :address, :business, :popularScore)", nativeQuery = true)
     @Transactional
     int addJobOffer(int accountID, Integer jobType, Integer location, Integer degree, int numOfRecruit, Timestamp offerEndTime, Timestamp createdDate, Integer salary, Integer age, String jobDescription, String other, Time startTime, Time endTime, String address, Integer business, Integer popularScore);
 
