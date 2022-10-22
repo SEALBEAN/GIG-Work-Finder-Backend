@@ -66,7 +66,9 @@ public class JobOfferController {
     }
 
     @PostMapping("/CreateJO")
-    public ResponseEntity<?> createJO(@ModelAttribute JobOfferForm joe) {
+    public ResponseEntity<?> createJO(@RequestBody JobOfferForm joe) {
+
+//        public ResponseEntity<?> createJO(@ModelAttribute() JobOfferForm joe) {
 //        try {
             Integer result = jobOfferService.createJO(joe);
             if (result == 1)
