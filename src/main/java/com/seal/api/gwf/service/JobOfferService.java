@@ -103,9 +103,9 @@ public class JobOfferService {
     public Integer createJO(JobOfferForm joe) {
         Time startTime = null, endTime = null;
         Timestamp offerEndTime;
-        if (!joe.getStartTime().isBlank())
+        if (joe.getStartTime() != null)
             startTime = Time.valueOf(joe.getStartTime() + ":00");
-        if (!joe.getEndTime().isBlank())
+        if (joe.getEndTime() != null)
             endTime = Time.valueOf(joe.getEndTime() + ":00");
         LocalDateTime d = LocalDateTime.parse(joe.getOfferEndTime() + " 00:00:00", Utils.DAYTIMEFORMATDDMMYYYY);
         offerEndTime = Timestamp.valueOf(d);
@@ -120,20 +120,20 @@ public class JobOfferService {
         JobOfferEntity jo = jobOfferRepository.findByOfferID(joe.getOfferID());
 
         Time startTime;
-        if (joe.getStartTime().isBlank()) {
+        if (joe.getStartTime() != null) {
             startTime = jo.getStartTime();
         } else {
             startTime = Time.valueOf(joe.getStartTime() + ":00");
         }
         Time endTime;
-        if (joe.getEndTime().isBlank()) {
+        if (joe.getEndTime() != null) {
             endTime = jo.getEndTime();
         } else {
             endTime = Time.valueOf(joe.getEndTime() + ":00");
         }
 
         Object offerEndTime;
-        if (joe.getOfferEndTime().isBlank()) {
+        if (joe.getOfferEndTime() != null) {
             offerEndTime = jo.getOfferEndTime();
         } else {
             offerEndTime = Timestamp.valueOf(LocalDateTime.parse(joe.getOfferEndTime() + " 00:00:00", Utils.DAYTIMEFORMATDDMMYYYY));
