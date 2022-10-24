@@ -24,6 +24,11 @@ public class BusinessService {
         return mapper.map(bu, Business.class);
     }
 
+    public Business getByAccountID(int id) {
+        BusinessEntity bu = businessRepository.getByAccountID(id);
+        return mapper.map(bu, Business.class);
+    }
+
     public List<Business> getAllBusiness(int quantity) {
         ArrayList<BusinessEntity> bu = (ArrayList<BusinessEntity>) businessRepository.getAll();
         ArrayList<Business> list = new ArrayList<>();

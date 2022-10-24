@@ -20,6 +20,9 @@ public class BusinessContrroller {
     @GetMapping("/ID/{id}")
     public Business getById(@PathVariable int id) {return businessService.getByID(id);}
 
+    @GetMapping("/ID/{aid}")
+    public Business getByAccountId(@PathVariable int aid) {return businessService.getByID(aid);}
+
     @GetMapping(value = { "/ALL"})
     @ResponseBody
     public List<Business> getAllJobOffers(@RequestParam(required = false) Integer limit) {
