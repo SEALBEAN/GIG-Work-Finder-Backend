@@ -20,7 +20,7 @@ public class BusinessContrroller {
     @GetMapping("/ID/{id}")
     public Business getById(@PathVariable int id) {return businessService.getByID(id);}
 
-    @GetMapping("/ID/{aid}")
+    @GetMapping("/AID/{aid}")
     public Business getByAccountId(@PathVariable int aid) {return businessService.getByID(aid);}
 
     @GetMapping(value = { "/ALL"})
