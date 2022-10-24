@@ -67,17 +67,12 @@ public class JobOfferController {
 
     @PostMapping("/CreateJO")
     public ResponseEntity<?> createJO(@RequestBody JobOfferForm joe) {
-
-//        public ResponseEntity<?> createJO(@ModelAttribute() JobOfferForm joe) {
-//        try {
+        System.out.println(joe);
             Integer result = jobOfferService.createJO(joe);
             if (result == 1)
                 return ResponseEntity.ok(HttpStatus.OK);
             else
                 return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
-//        }catch (Exception e){
-//            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
-//        }
     }
 
     @PutMapping("/UpdateJO")
