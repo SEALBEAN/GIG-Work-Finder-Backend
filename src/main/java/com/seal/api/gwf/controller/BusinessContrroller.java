@@ -21,7 +21,7 @@ public class BusinessContrroller {
     public Business getById(@PathVariable int id) {return businessService.getByID(id);}
 
     @GetMapping("/AID/{aid}")
-    public Business getByAccountId(@PathVariable int aid) {return businessService.getByID(aid);}
+    public List<Business> getByAccountId(@PathVariable int aid) {return businessService.getByAccountID(aid);}
 
     @GetMapping(value = { "/ALL"})
     @ResponseBody
@@ -35,7 +35,7 @@ public class BusinessContrroller {
     @PostMapping("/CreateBu")
     public ResponseEntity<?> createJO(@ModelAttribute BusinessForm bf) {
         try {
-            Integer result = businessService.createJO(bf);
+            Integer result = businessService.createBu(bf);
             if (result == 1)
                 return ResponseEntity.ok(HttpStatus.OK);
             else

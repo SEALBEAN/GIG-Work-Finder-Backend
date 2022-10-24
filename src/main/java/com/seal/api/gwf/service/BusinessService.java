@@ -24,9 +24,14 @@ public class BusinessService {
         return mapper.map(bu, Business.class);
     }
 
-    public Business getByAccountID(int id) {
-        BusinessEntity bu = businessRepository.getByAccountID(id);
-        return mapper.map(bu, Business.class);
+    public List<Business> getByAccountID(int id) {
+        ArrayList<BusinessEntity> bu = (ArrayList<BusinessEntity>) businessRepository.getByAccountID(id);
+        ArrayList<Business> list = new ArrayList<>();
+        for (BusinessEntity j :
+                bu) {
+            list.add(mapper.map(j, Business.class));
+        }
+        return list;
     }
 
     public List<Business> getAllBusiness(int quantity) {
@@ -47,7 +52,7 @@ public class BusinessService {
         return list;
     }
 
-    public Integer createJO(BusinessForm joe) {
+    public Integer createBu(BusinessForm joe) {
         int result = businessRepository.addJobOffer(joe.getLocation(), joe.getAccountID(), joe.getAddress(), joe.getBusinessName(),
                 joe.getBusinessLogo(), joe.getDescription(), joe.getBenefit());
         return result;

@@ -15,7 +15,7 @@ public interface BusinessRepository extends JpaRepository<BusinessEntity, Intege
     BusinessEntity getByID(int id);
 
     @Query(value = "SELECT * FROM Business WHERE AccountID = ?1", nativeQuery = true)
-    BusinessEntity getByAccountID(int id);
+    List<BusinessEntity> getByAccountID(int id);
     @Query(value = "SELECT * FROM Business",nativeQuery = true)
     List<BusinessEntity> getAll();
 
