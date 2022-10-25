@@ -11,13 +11,12 @@ import java.sql.Timestamp;
 
 @Repository
 public interface ApplicantRepository extends JpaRepository<ApplicantEntity, Integer> {
-    public ApplicantEntity findByEmail(String email);
 
     @Query(value = "SELECT * FROM Applicant WHERE AccountID = ?1", nativeQuery = true)
     ApplicantEntity getByAccountID(int id);
 
     @Query(value = "SELECT * FROM Applicant WHERE Email = ?1", nativeQuery = true)
-    ApplicantEntity getByEmail(String email);
+    ApplicantEntity findByEmail(String email);
     @Modifying
     @Query(value = "INSERT INTO Applicant(LocationID, DegreeID, FirstName, LastName, Phone, DOB, Gender, Email, Address, Verify, Status, Description) " +
             "VALUES (:locationID, :degreeID, :firstName, :lastName, :phone, :dob, :gender, :email, :address, 1, 1, :description)",nativeQuery = true)

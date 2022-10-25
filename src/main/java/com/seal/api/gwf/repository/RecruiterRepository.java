@@ -14,7 +14,7 @@ public interface RecruiterRepository extends JpaRepository<RecruiterEntity, Inte
     @Query(value = "SELECT * FROM Recruiter WHERE AccountID = ?1 AND Status = 1", nativeQuery = true)
     RecruiterEntity findByAccountID(int ID);
     @Query(value = "SELECT * FROM Recruiter WHERE Email = ?1", nativeQuery = true)
-    RecruiterEntity getByEmail(String email);
+    RecruiterEntity findByEmail(String email);
 
     @Modifying
     @Query(value = "UPDATE Recruiter\n" +
