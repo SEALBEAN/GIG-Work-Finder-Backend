@@ -35,13 +35,20 @@ public class BusinessContrroller {
 
     @PostMapping("/CreateBu")
     //public ResponseEntity<?> createJO(@RequestBody BusinessForm businessLogo) {
-        public ResponseEntity<?> createJO(@RequestParam("businessLogo") MultipartFile businessLogo) {
+        public ResponseEntity<?> createJO(@RequestParam("locationID") Integer locationID,
+                                          @RequestParam("accountID") Integer accountID,
+                                          @RequestParam(value = "address",required = false) String address,
+                                          @RequestParam(value = "businessName", required = false) String businessName,
+                                          @RequestParam(value = "businessLogo", required = false) MultipartFile businessLogo,
+                                          @RequestParam(value = "description", required = false) String description,
+                                          @RequestParam(value = "benefit" , required = false) String benefit) {
             try {
             String fileName = businessLogo.getOriginalFilename();
-            System.out.println(fileName);
-            //System.out.println(bf);
-            //Integer result = businessService.createBu(bf);
-            if (1 == 1)
+            System.out.println(fileName + businessName + locationID + accountID + address + description + benefit);
+            BusinessForm bf = new BusinessForm(locationID, accountID, address, businessName, businessLogo, description, benefit);
+            System.out.println(bf);
+            Integer result = businessService.createBu(bf);
+            if (result == 1)
                 return ResponseEntity.ok(HttpStatus.OK);
             else
                 return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
