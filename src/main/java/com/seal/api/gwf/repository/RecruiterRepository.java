@@ -1,5 +1,6 @@
 package com.seal.api.gwf.repository;
 
+import com.seal.api.gwf.entity.ApplicantEntity;
 import com.seal.api.gwf.entity.RecruiterEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -12,7 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 public interface RecruiterRepository extends JpaRepository<RecruiterEntity, Integer> {
     @Query(value = "SELECT * FROM Recruiter WHERE AccountID = ?1 AND Status = 1", nativeQuery = true)
     RecruiterEntity findByAccountID(int ID);
-    RecruiterEntity findByEmail(String email);
+    @Query(value = "SELECT * FROM Recruiter WHERE Email = ?1", nativeQuery = true)
+    RecruiterEntity getByEmail(String email);
 
     @Modifying
     @Query(value = "UPDATE Recruiter\n" +
