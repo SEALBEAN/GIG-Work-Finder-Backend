@@ -41,18 +41,27 @@ public class AuthorizationService {
         System.out.println(token);
         if ("Recruiter".equals(role)){
             RecruiterEntity recruiterEntity =  recruiterRepository.findByEmail(email);
-            if (recruiterEntity != null) {
-                token.setId(recruiterEntity.getAccountID());
-                token.setName(recruiterEntity.getFirstName() + " " + recruiterEntity.getLastName());
-                token.setGender(recruiterEntity.getGender());
-                //if doesn't have account -> create new
-            } else recruiterRepository.addRecruiter(
-                    data.getName().replace(data.getName().split("")[0],""),data.getName().split(" ")[0],
-                    null, data.getGender(), data.getEmail(), null);
+            if (recruiterEntity == null) {
+                recruiterRepository.addRecruiter(
+                        data.getName().replace(data.getName().split("")[0], ""), data.getName().split(" ")[0],
+                        null, data.getGender(), data.getEmail(), null);
+                recruiterEntity =  recruiterRepository.findByEmail(email);
+            }
+            // have account in database
+            token.setId(recruiterEntity.getAccountID());
+            token.setName(recruiterEntity.getFirstName() + " " + recruiterEntity.getLastName());
+            token.setGender(recruiterEntity.getGender());
         } else
         if ("Applicant".equals(role))
         {
             ApplicantEntity applicantEntity =  applicantRepository.findByEmail(email);
+            if (applicantEntity == null) {
+                //doesn't has account -> create
+                applicantRepository.addApplicant(null,null,
+                        data.getName().replace(data.getName().split("")[0], ""), data.getName().split(" ")[0],
+                        null, data.getGender(), data.getEmail(), null);
+                applicantEntity =  applicantRepository.findByEmail(email);
+            }
             token.setId(applicantEntity.getAccountID());
             token.setName(applicantEntity.getFirstName() + " " + applicantEntity.getLastName());
             token.setGender(applicantEntity.getGender());
@@ -66,6 +75,7 @@ public class AuthorizationService {
         }
         //set data
         String tokenString =  cryptionService.encode(token);
+        data.setId(token.getId());
         data.setToken(tokenString);
         return data;
     }
