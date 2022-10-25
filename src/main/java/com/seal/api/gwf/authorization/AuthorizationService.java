@@ -28,8 +28,11 @@ public class AuthorizationService {
     CryptionService cryptionService;
 
 
-    public Data CheckAndAuthorizationWithEmail(String email, String role, String picUrl){
+    public Data CheckAndAuthorizationWithEmail(Data data){
         String result = "";
+        String email =data.getEmail();
+        String role = data.getRole();
+        String picUrl = data.getPicUrl();
         // check email in Applicant table for applicant role
         Token token = new Token();
         token.setEmail(email);
@@ -38,9 +41,14 @@ public class AuthorizationService {
         System.out.println(token);
         if ("Recruiter".equals(role)){
             RecruiterEntity recruiterEntity =  recruiterRepository.findByEmail(email);
-            token.setId(recruiterEntity.getAccountID());
-            token.setName(recruiterEntity.getFirstName() + " " + recruiterEntity.getLastName());
-            token.setGender(recruiterEntity.getGender());
+            if (recruiterEntity != null) {
+                token.setId(recruiterEntity.getAccountID());
+                token.setName(recruiterEntity.getFirstName() + " " + recruiterEntity.getLastName());
+                token.setGender(recruiterEntity.getGender());
+                //if doesn't have account -> create new
+            } else recruiterRepository.addRecruiter(
+                    data.getName().replace(data.getName().split("")[0],""),data.getName().split(" ")[0],
+                    null, data.getGender(), data.getEmail(), null);
         } else
         if ("Applicant".equals(role))
         {
@@ -58,13 +66,7 @@ public class AuthorizationService {
         }
         //set data
         String tokenString =  cryptionService.encode(token);
-        Data data = new Data(tokenString);
-        data.setId(token.getId());
-        data.setEmail(token.getEmail());
-        data.setRole(token.getRole());
-        data.setName(token.getName());
-        data.setPicUrl(token.getPicUrl());
-        data.setGender(token.getGender());
+        data.setToken(tokenString);
         return data;
     }
 }
