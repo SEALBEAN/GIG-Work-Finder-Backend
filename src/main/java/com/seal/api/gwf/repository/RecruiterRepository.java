@@ -24,8 +24,8 @@ public interface RecruiterRepository extends JpaRepository<RecruiterEntity, Inte
     Integer updateRecruiter(int accountID, String firstName, String lastName, String phone, String gender, String email, String description);
 
     @Modifying
-    @Query(value = "INSERT INTO Recruiter(FirstName, LastName, Phone, Gender, Email, Verify, Status, Description) " +
-            "VALUES (:firstName, :lastName, :phone, :gender, :email, 1, 1, :description)",nativeQuery = true)
+    @Query(value = "INSERT INTO Recruiter(FirstName, LastName, Gender, Email, Verify, Status) " +
+            "VALUES (:firstName, :lastName, :gender, :email, 1, 1)",nativeQuery = true)
     @Transactional
-    Integer addRecruiter(String firstName, String lastName, String phone, String gender, String email, String description);
+    Integer addRecruiter(String firstName, String lastName, String gender, String email);
 }
