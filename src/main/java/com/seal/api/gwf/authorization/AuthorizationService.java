@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Entity;
+import java.util.concurrent.TimeUnit;
 
 
 @Service
@@ -28,8 +29,12 @@ public class AuthorizationService {
     CryptionService cryptionService;
 
 
-    public Data CheckAndAuthorizationWithEmail(String email, String role, String picUrl){
+    public Data CheckAndAuthorizationWithEmail(Data data){
         String result = "";
+        String email =data.getEmail();
+        String role = data.getRole();
+        String picUrl = data.getPicUrl();
+        String name = data.getName();
         // check email in Applicant table for applicant role
         Token token = new Token();
         token.setEmail(email);
@@ -38,6 +43,13 @@ public class AuthorizationService {
         System.out.println(token);
         if ("Recruiter".equals(role)){
             RecruiterEntity recruiterEntity =  recruiterRepository.findByEmail(email);
+            if (recruiterEntity == null) {
+                recruiterRepository.addRecruiter(
+                        name.substring(name.indexOf(" ") + 1, name.length()),name.substring(0,name.indexOf(" ")),
+                        data.getGender(), data.getEmail());
+                recruiterEntity =  recruiterRepository.findByEmail(email);
+            }
+            // have account in database
             token.setId(recruiterEntity.getAccountID());
             token.setName(recruiterEntity.getFirstName() + " " + recruiterEntity.getLastName());
             token.setGender(recruiterEntity.getGender());
@@ -45,6 +57,13 @@ public class AuthorizationService {
         if ("Applicant".equals(role))
         {
             ApplicantEntity applicantEntity =  applicantRepository.findByEmail(email);
+            if (applicantEntity == null) {
+                //doesn't has account -> create
+                applicantRepository.addApplicant(
+                        name.substring(name.indexOf(" ") + 1, name.length()),name.substring(0,name.indexOf(" ")),
+                        data.getGender(), data.getEmail());
+                applicantEntity =  applicantRepository.findByEmail(email);
+            }
             token.setId(applicantEntity.getAccountID());
             token.setName(applicantEntity.getFirstName() + " " + applicantEntity.getLastName());
             token.setGender(applicantEntity.getGender());
@@ -58,13 +77,8 @@ public class AuthorizationService {
         }
         //set data
         String tokenString =  cryptionService.encode(token);
-        Data data = new Data(tokenString);
         data.setId(token.getId());
-        data.setEmail(token.getEmail());
-        data.setRole(token.getRole());
-        data.setName(token.getName());
-        data.setPicUrl(token.getPicUrl());
-        data.setGender(token.getGender());
+        data.setToken(tokenString);
         return data;
     }
 }
