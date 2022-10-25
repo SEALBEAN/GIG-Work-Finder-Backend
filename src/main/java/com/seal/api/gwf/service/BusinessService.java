@@ -64,7 +64,7 @@ public class BusinessService {
             message = "Error uploading file: " + ex.getMessage();
         }
         System.out.println(message);
-        int result = businessRepository.addJobOffer(joe.getLocation(), joe.getAccountID(), joe.getAddress(), joe.getBusinessName(),
+        int result = businessRepository.addJobOffer(joe.getLocationID(), joe.getAccountID(), joe.getAddress(), joe.getBusinessName(),
                 link, joe.getDescription(), joe.getBenefit());
         return result;
     }

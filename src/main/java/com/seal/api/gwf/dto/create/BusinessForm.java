@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @Builder
 public class BusinessForm {
-    private Integer location;
+    private Integer locationID;
 
     private Integer accountID;
 

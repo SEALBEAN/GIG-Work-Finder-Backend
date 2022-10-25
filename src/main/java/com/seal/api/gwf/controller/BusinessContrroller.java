@@ -34,10 +34,10 @@ public class BusinessContrroller {
     }
 
     @PostMapping("/CreateBu")
-    public ResponseEntity<?> createJO(@RequestBody BusinessForm businessLogo) {
-        //public ResponseEntity<?> createJO(@RequestParam("businessName") String businessLogo) {
+    //public ResponseEntity<?> createJO(@RequestBody BusinessForm businessLogo) {
+        public ResponseEntity<?> createJO(@RequestParam("businessLogo") MultipartFile businessLogo) {
             try {
-            String fileName = businessLogo.getBusinessLogo().getOriginalFilename();
+            String fileName = businessLogo.getOriginalFilename();
             System.out.println(fileName);
             //System.out.println(bf);
             //Integer result = businessService.createBu(bf);
