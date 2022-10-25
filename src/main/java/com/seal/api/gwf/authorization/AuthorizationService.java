@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Entity;
+import java.util.concurrent.TimeUnit;
 
 
 @Service
@@ -33,6 +34,7 @@ public class AuthorizationService {
         String email =data.getEmail();
         String role = data.getRole();
         String picUrl = data.getPicUrl();
+        String name = data.getName();
         // check email in Applicant table for applicant role
         Token token = new Token();
         token.setEmail(email);
@@ -43,8 +45,8 @@ public class AuthorizationService {
             RecruiterEntity recruiterEntity =  recruiterRepository.findByEmail(email);
             if (recruiterEntity == null) {
                 recruiterRepository.addRecruiter(
-                        data.getName().replace(data.getName().split("")[0], ""), data.getName().split(" ")[0],
-                        null, data.getGender(), data.getEmail(), null);
+                        name.substring(name.indexOf(" ") + 1, name.length()),name.substring(0,name.indexOf(" ")),
+                        data.getGender(), data.getEmail());
                 recruiterEntity =  recruiterRepository.findByEmail(email);
             }
             // have account in database
@@ -57,9 +59,9 @@ public class AuthorizationService {
             ApplicantEntity applicantEntity =  applicantRepository.findByEmail(email);
             if (applicantEntity == null) {
                 //doesn't has account -> create
-                applicantRepository.addApplicant(null,null,
-                        data.getName().replace(data.getName().split("")[0], ""), data.getName().split(" ")[0],
-                        null, data.getGender(), data.getEmail(), null);
+                applicantRepository.addApplicant(
+                        name.substring(name.indexOf(" ") + 1, name.length()),name.substring(0,name.indexOf(" ")),
+                        data.getGender(), data.getEmail());
                 applicantEntity =  applicantRepository.findByEmail(email);
             }
             token.setId(applicantEntity.getAccountID());
