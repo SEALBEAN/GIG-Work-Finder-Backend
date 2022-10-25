@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -33,15 +34,19 @@ public class BusinessContrroller {
     }
 
     @PostMapping("/CreateBu")
-    public ResponseEntity<?> createJO(@ModelAttribute BusinessForm bf) {
-        try {
-            Integer result = businessService.createBu(bf);
-            if (result == 1)
+    public ResponseEntity<?> createJO(@RequestParam("businessLogo") MultipartFile businessLogo) {
+        //public ResponseEntity<?> createJO(@RequestParam("businessName") String businessLogo) {
+            try {
+            String fileName = businessLogo.getOriginalFilename();
+            System.out.println(fileName);
+            //System.out.println(bf);
+            //Integer result = businessService.createBu(bf);
+            if (1 == 1)
                 return ResponseEntity.ok(HttpStatus.OK);
             else
                 return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
     }

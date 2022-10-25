@@ -1,15 +1,14 @@
 package com.seal.api.gwf.dto.create;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class BusinessForm {
     private Integer location;
 
@@ -19,7 +18,7 @@ public class BusinessForm {
 
     private String businessName;
 
-    private String businessLogo;
+    private MultipartFile businessLogo;
 
     private String description;
 
