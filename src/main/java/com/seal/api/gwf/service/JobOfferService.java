@@ -134,9 +134,9 @@ public class JobOfferService {
 
         Object offerEndTime;
         if (joe.getOfferEndTime() != null) {
-            offerEndTime = jo.getOfferEndTime();
-        } else {
             offerEndTime = Timestamp.valueOf(LocalDateTime.parse(joe.getOfferEndTime() + " 00:00:00", Utils.DAYTIMEFORMATDDMMYYYY));
+        } else {
+            offerEndTime = jo.getOfferEndTime();
         }
         Timestamp createdDate = new Timestamp(System.currentTimeMillis());
 
