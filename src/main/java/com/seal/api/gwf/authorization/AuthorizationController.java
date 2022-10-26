@@ -17,7 +17,7 @@ public class AuthorizationController {
     @PostMapping("")
     public ResponseEntity<?> CheckAndCreateAccountAndAccountTokenForAuthorization(@RequestBody Data data){
         Data googleData;
-        String idTokenString = data.getToken().replace("Bearer ", "");
+        String idTokenString = data.getToken().split(" ")[1].trim();
 
 //        try {
 //            googleData = GoogleApiVerifier.VerifyGoogleToken(idTokenString);
