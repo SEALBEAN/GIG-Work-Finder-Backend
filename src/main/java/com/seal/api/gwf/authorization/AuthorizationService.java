@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Entity;
+import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -41,6 +42,7 @@ public class AuthorizationService {
         token.setRole(role);
         token.setPicUrl(picUrl);
         System.out.println(token);
+        try{
         if ("Recruiter".equals(role)){
             RecruiterEntity recruiterEntity =  recruiterRepository.findByEmail(email);
             if (recruiterEntity == null) {
@@ -74,6 +76,10 @@ public class AuthorizationService {
             token.setId(adminEntity.getAccountID());
             token.setName(adminEntity.getFirstName() + " " + adminEntity.getLastName());
             token.setGender(adminEntity.getGender());
+        }
+        } catch (Exception ex){
+            System.out.println("handle Email unit key");
+            //handle email Unit Key
         }
         //set data
         String tokenString =  cryptionService.encode(token);
