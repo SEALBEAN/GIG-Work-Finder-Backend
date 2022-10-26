@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class Utils {
 
     public static final DateTimeFormatter DAYTIMEFORMATDDMMYYYY = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm:ss"); //format cho Date
-
+    public static final DateTimeFormatter DAYFORMATDDMMYYYY = DateTimeFormatter.ofPattern("dd/MM/uuuu");
     private static final Scanner sc = new Scanner(System.in);
 
     public static int getInt(String message, int oldData) {

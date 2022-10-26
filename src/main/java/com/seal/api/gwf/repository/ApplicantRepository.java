@@ -22,4 +22,12 @@ public interface ApplicantRepository extends JpaRepository<ApplicantEntity, Inte
             "VALUES (:firstName, :lastName, :gender, :email, 1, 1)",nativeQuery = true)
     @Transactional
     Integer addApplicant(String firstName, String lastName, String gender, String email);
+
+    @Modifying
+    @Query(value = """
+            UPDATE Applicant
+            SET LocationID = ?2, DegreeID = ?3, FirstName = ?4, LastName = ?5, Phone = ?6, DOB = ?7, Gender = ?8, Address = ?9, Description = ?10
+            WHERE AccountID = ?1""", nativeQuery = true)
+    @Transactional
+    int updateApp(int accountID, Integer locationID, Integer degreeID, String firstName, String lastName, String phone, Object dob, String gender, String address, String description);
 }
