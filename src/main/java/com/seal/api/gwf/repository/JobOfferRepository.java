@@ -1,5 +1,6 @@
 package com.seal.api.gwf.repository;
 
+import com.seal.api.gwf.dto.JobOffer;
 import com.seal.api.gwf.entity.JobOfferEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -33,6 +34,13 @@ public interface JobOfferRepository extends JpaRepository <JobOfferEntity, Integ
     @Query(value = "SELECT dbo.FN_PopScoreJobOffer(?1)", nativeQuery = true)
     Float calPopularScore(int id);
 
+
+    @Query(value = "SELECT * FROM JobOffer WHERE AccountID = ?1", nativeQuery = true)
+    List<JobOfferEntity> getByAccountID(int aid);
+
+    @Query(value = "SELECT * FROM JobOffer WHERE AccountID = ?1 AND Status = ?2", nativeQuery = true)
+    List<JobOfferEntity> getByAccountID(int aid, int status);
+
     @Modifying
     @Query(value = "INSERT INTO JobOffer (AccountID, TypeID, LocationID, DegreeID, NumOfRecruit, OfferEndTime, CreatedDate, Salary, Age, Visual, JobDescription, Other, StartTime, EndTime, Address, BusinessID, PopularScore)" +
             "VALUES (:accountID, :jobType, :location, :degree, :numOfRecruit, :offerEndTime, :createdDate, :salary, :age, 0, :jobDescription, :other, :startTime, :endTime, :address, :business, :popularScore)", nativeQuery = true)
@@ -54,4 +62,6 @@ public interface JobOfferRepository extends JpaRepository <JobOfferEntity, Integ
             WHERE OfferID = ?1""", nativeQuery = true)
     @Transactional
     Integer deleteByID(int id);
+
+
 }
