@@ -67,42 +67,41 @@ public class JobOfferController {
 
     @PostMapping("/CreateJO")
     public ResponseEntity<?> createJO(@RequestBody JobOfferForm joe) {
-
-//        public ResponseEntity<?> createJO(@ModelAttribute() JobOfferForm joe) {
-//        try {
+        try {
             Integer result = jobOfferService.createJO(joe);
             if (result == 1)
                 return ResponseEntity.ok(HttpStatus.OK);
             else
                 return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
-//        }catch (Exception e){
-//            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
-//        }
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
     }
 
     @PutMapping("/UpdateJO")
     public ResponseEntity<?> updateJO(@ModelAttribute JobOfferForm joe){
-//        try{
+        try{
             Integer result = jobOfferService.updateJO(joe);
             if (result == 1)
                 return ResponseEntity.ok(HttpStatus.OK);
             else
                 return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
-//        }catch (Exception e){
-//            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
-//        }
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
 
     @DeleteMapping("/DeleteJO/{id}")
     public ResponseEntity<?> deleteJO(@PathVariable int id){
-//        try{
+        try{
         Integer result = jobOfferService.deleteJO(id);
         if (result == 1)
             return ResponseEntity.ok(HttpStatus.OK);
         else
             return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
-//        }catch (Exception e){
-//            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
-//        }
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
 }
