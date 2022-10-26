@@ -21,11 +21,12 @@ public class ApplicantService {
     public Integer updateApp(ApplicantForm app) {
         ApplicantEntity appe = applicantRepository.getByAccountID(app.getAccountID());
 
-        Object dob;
+        Object dob = null;
         if (app.getDob() == null) {
-            dob = appe.getDob();
+            if (appe.getDob() != null)
+                dob = appe.getDob();
         } else {
-            dob = Timestamp.valueOf(LocalDateTime.parse(app.getDob().toString() + " 00:00:00", Utils.DAYTIMEFORMATDDMMYYYY));
+                dob = Timestamp.valueOf(LocalDateTime.parse(app.getDob()+ " 00:00:00", Utils.DAYTIMEFORMATDDMMYYYY));
         }
 
         if (app.getLocationID() == null) {
@@ -61,7 +62,7 @@ public class ApplicantService {
                 app.setDescription(appe.getDescription());
         }
         int result = applicantRepository.updateApp(appe.getAccountID(), app.getLocationID(), app.getDegreeID(), app.getFirstName(), app.getLastName(), app.getPhone()
-                                                    , dob, app.getGender(), app.getAddress(), app.getDescription());
+                                                    ,(Timestamp) dob, app.getGender(), app.getAddress(), app.getDescription());
         return result;
     }
 
