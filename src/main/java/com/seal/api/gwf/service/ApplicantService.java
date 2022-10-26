@@ -22,10 +22,10 @@ public class ApplicantService {
         ApplicantEntity appe = applicantRepository.getByAccountID(app.getAccountID());
 
         Object dob;
-        if (app.getDob() != null) {
+        if (app.getDob() == null) {
             dob = appe.getDob();
         } else {
-            dob = Timestamp.valueOf(LocalDateTime.parse(app.getDob().toString(), Utils.DAYFORMATDDMMYYYY));
+            dob = Timestamp.valueOf(LocalDateTime.parse(app.getDob(), Utils.DAYFORMATDDMMYYYY));
         }
 
         if (app.getLocationID() == null) {

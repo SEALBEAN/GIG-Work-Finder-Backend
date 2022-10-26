@@ -26,7 +26,7 @@ public class ApplicantForm {
 
     private String phone;
 
-    private Date dob;
+    private String dob;
 
     private String gender;
 
