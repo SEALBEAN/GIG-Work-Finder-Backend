@@ -60,6 +60,16 @@ public class JobOfferController {
             return jobOfferService.getPopularJobOffers(limit);
     }
 
+    @GetMapping("/GetAllJO/{aid}")
+    public List<JobOffer> getAllJobOffersByAID(@PathVariable int aid) {return jobOfferService.getAllJobOffersByAID(aid);}
+
+    @GetMapping("/GetAllJOActive/{aid}")
+    public List<JobOffer> getAllJobOffersByAIDActive(@PathVariable int aid) {return jobOfferService.getAllJobOffersByAIDStatus(aid ,1);}
+
+    @GetMapping("/GetAllJOUnActive/{aid}")
+    public List<JobOffer> getAllJobOffersByAIDUnActive(@PathVariable int aid) {return jobOfferService.getAllJobOffersByAIDStatus(aid ,0);}
+
+
     @GetMapping("/CreateJO/{id}")
     public CreateJOService.CreateJO getInfo(@PathVariable int id){
         return createJOService.getInfo(id);

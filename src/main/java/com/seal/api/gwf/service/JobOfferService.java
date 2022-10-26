@@ -183,4 +183,22 @@ public class JobOfferService {
 
     public Integer deleteJO(int id) {return jobOfferRepository.deleteByID(id);
     }
+
+    public List<JobOffer> getAllJobOffersByAID(int aid) {
+        List<JobOfferEntity> joe = jobOfferRepository.getByAccountID(aid);
+        ArrayList<JobOffer> result = new ArrayList<>();
+        for (JobOfferEntity jo: joe) {
+            result.add(mapper.map(jo, JobOffer.class));
+        }
+        return result;
+    }
+
+    public List<JobOffer> getAllJobOffersByAIDStatus(int aid, int status) {
+        List<JobOfferEntity> joe = jobOfferRepository.getByAccountID(aid, status);
+        ArrayList<JobOffer> result = new ArrayList<>();
+        for (JobOfferEntity jo: joe) {
+            result.add(mapper.map(jo, JobOffer.class));
+        }
+        return result;
+    }
 }
