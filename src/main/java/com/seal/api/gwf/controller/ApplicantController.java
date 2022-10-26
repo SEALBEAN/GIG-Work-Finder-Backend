@@ -27,7 +27,7 @@ public class ApplicantController {
     public List<ApplicantEntity> getAllApplicants() {return applicantService.getAllApplicants();}
 
     @PutMapping("/UpdateApp")
-    public ResponseEntity<?> updateApp(@ModelAttribute ApplicantForm app){
+    public ResponseEntity<?> updateApp(@RequestBody ApplicantForm app){
         try{
             Integer result = applicantService.updateApp(app);
             if (result == 1)

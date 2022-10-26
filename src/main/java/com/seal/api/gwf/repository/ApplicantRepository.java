@@ -29,5 +29,5 @@ public interface ApplicantRepository extends JpaRepository<ApplicantEntity, Inte
             SET LocationID = ?2, DegreeID = ?3, FirstName = ?4, LastName = ?5, Phone = ?6, DOB = ?7, Gender = ?8, Address = ?9, Description = ?10
             WHERE AccountID = ?1""", nativeQuery = true)
     @Transactional
-    int updateApp(int accountID, Integer locationID, Integer degreeID, String firstName, String lastName, String phone, Object dob, String gender, String address, String description);
+    int updateApp(int accountID, Integer locationID, Integer degreeID, String firstName, String lastName, String phone, Timestamp dob, String gender, String address, String description);
 }
