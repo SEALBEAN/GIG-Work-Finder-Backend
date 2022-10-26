@@ -17,8 +17,8 @@ public class RecruiterController {
     @GetMapping("/AID/{id}")
     public RecruiterEntity getByAccountID(@PathVariable int id) { return recruiterService.getByAccountID(id);}
 
-    @PutMapping("/UpdateRecruiter")
-    public ResponseEntity<?> updateJO(@ModelAttribute Recruiter re){
+    @PutMapping("/Update")
+    public ResponseEntity<?> updateJO(@RequestBody Recruiter re){
 //        try{
         Integer result = recruiterService.updateR(re);
         if (result == 1)

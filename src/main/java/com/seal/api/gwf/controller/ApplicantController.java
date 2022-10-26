@@ -26,8 +26,8 @@ public class ApplicantController {
     @GetMapping("/ALL")
     public List<ApplicantEntity> getAllApplicants() {return applicantService.getAllApplicants();}
 
-    @PutMapping("/UpdateApp")
-    public ResponseEntity<?> updateApp(@ModelAttribute ApplicantForm app){
+    @PutMapping("/Update")
+    public ResponseEntity<?> updateApp(@RequestBody ApplicantForm app){
         try{
             Integer result = applicantService.updateApp(app);
             if (result == 1)
@@ -35,7 +35,7 @@ public class ApplicantController {
             else
                 return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 }
