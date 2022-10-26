@@ -53,19 +53,56 @@ public class BusinessService {
         return list;
     }
 
-    public Integer createBu(BusinessForm joe) {
-        String fileName = joe.getBusinessLogo().getOriginalFilename();
+    public Integer createBu(BusinessForm bf) {
+        String fileName = bf.getBusinessLogo().getOriginalFilename();
         String message = "";
         String link = "";
         try {
-            link = S3Util.uploadFile(fileName, joe.getBusinessLogo().getInputStream());
+            link = S3Util.uploadFile(fileName, bf.getBusinessLogo().getInputStream());
             message = "Your file has been uploaded successfully!\n";
         } catch (Exception ex) {
             message = "Error uploading file: " + ex.getMessage();
         }
         System.out.println(message);
-        int result = businessRepository.addJobOffer(joe.getLocationID(), joe.getAccountID(), joe.getAddress(), joe.getBusinessName(),
-                link, joe.getDescription(), joe.getBenefit());
+        int result = businessRepository.addBusiness(bf.getLocationID(), bf.getAccountID(), bf.getAddress(), bf.getBusinessName(),
+                link, bf.getDescription(), bf.getBenefit());
+        return result;
+    }
+
+    public Integer updateBu(BusinessForm bf) {
+        BusinessEntity be = businessRepository.getByID(bf.getBusinessID());
+        String fileName = bf.getBusinessLogo().getOriginalFilename();
+        String link = "";
+        if (fileName == "")
+            link = be.getBusinessLogo();
+        else {
+            String message = "";
+            try {
+                link = S3Util.uploadFile(fileName, bf.getBusinessLogo().getInputStream());
+                message = "Your file has been uploaded successfully!\n";
+            } catch (Exception ex) {
+                message = "Error uploading file: " + ex.getMessage();
+            }
+            System.out.println(message);
+        }
+        if (bf.getLocationID() == null){
+            bf.setLocationID(be.getLocation().getLocationID());
+        }
+        if (bf.getAddress() == null){
+            bf.setAddress(be.getAddress());
+        }
+        if (bf.getBusinessName() == null){
+            bf.setBusinessName(be.getBusinessName());
+        }
+        if (bf.getDescription() == null){
+            bf.setDescription(be.getDescription());
+        }
+        if (bf.getBenefit() == null){
+            bf.setBenefit(be.getBenefit());
+        }
+
+        int result = businessRepository.updateBusiness(be.getBusinessID(), bf.getLocationID(), bf.getAddress(), bf.getBusinessName(),
+                link, bf.getDescription(), bf.getBenefit(), bf.getAccountID());
         return result;
     }
 }

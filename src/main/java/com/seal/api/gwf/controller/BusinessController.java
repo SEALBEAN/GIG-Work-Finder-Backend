@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("Business")
-public class BusinessContrroller {
+public class BusinessController {
     @Autowired
     BusinessService businessService;
 
@@ -34,8 +34,7 @@ public class BusinessContrroller {
     }
 
     @PostMapping("/CreateBu")
-    //public ResponseEntity<?> createJO(@RequestBody BusinessForm businessLogo) {
-        public ResponseEntity<?> createJO(@RequestParam("locationID") Integer locationID,
+        public ResponseEntity<?> createBu(@RequestParam("locationID") Integer locationID,
                                           @RequestParam("accountID") Integer accountID,
                                           @RequestParam(value = "address",required = false) String address,
                                           @RequestParam(value = "businessName", required = false) String businessName,
@@ -55,6 +54,29 @@ public class BusinessContrroller {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
+    }
 
+    @PutMapping("/UpdateBu")
+    public ResponseEntity<?> UpdateBu(@RequestParam("businessID") Integer businessID,
+                                      @RequestParam("locationID") Integer locationID,
+                                      @RequestParam("accountID") Integer accountID,
+                                      @RequestParam(value = "address",required = false) String address,
+                                      @RequestParam(value = "businessName", required = false) String businessName,
+                                      @RequestParam(value = "businessLogo", required = false) MultipartFile businessLogo,
+                                      @RequestParam(value = "description", required = false) String description,
+                                      @RequestParam(value = "benefit" , required = false) String benefit) {
+        try {
+            String fileName = businessLogo.getOriginalFilename();
+            System.out.println(fileName + businessName + locationID + accountID + address + description + benefit);
+            BusinessForm bf = new BusinessForm(businessID, locationID, accountID, address, businessName, businessLogo, description, benefit);
+            System.out.println(bf);
+            Integer result = businessService.updateBu(bf);
+            if (result == 1)
+                return ResponseEntity.ok(HttpStatus.OK);
+            else
+                return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
 }

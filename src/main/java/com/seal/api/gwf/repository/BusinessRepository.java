@@ -25,5 +25,16 @@ public interface BusinessRepository extends JpaRepository<BusinessEntity, Intege
     @Modifying
     @Query(value = "INSERT INTO Business VALUES (:location, :accountID, :address, :businessName, :businessLogo, :description, :benefit)", nativeQuery = true)
     @Transactional
-    Integer addJobOffer(Integer location, Integer accountID, String address, String businessName, String businessLogo, String description, String benefit);
+    Integer addBusiness(Integer location, Integer accountID, String address, String businessName, String businessLogo, String description, String benefit);
+
+
+    @Modifying
+    @Query(value = """
+            UPDATE Business
+            SET LocationID = ?2, Address = ?3, BusinessName = ?4, BusinessLogo = ?5, Description = ?6, Benefit = ?7
+            WHERE BusinessID = ?1 AND AccountID = ?8""",nativeQuery = true)
+    @Transactional
+    int updateBusiness(int businessID, Integer locationID, String address, String businessName, String link, String description, String benefit, int accountID);
+
+
 }
