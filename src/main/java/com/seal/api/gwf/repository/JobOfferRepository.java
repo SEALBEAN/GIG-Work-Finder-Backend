@@ -1,6 +1,5 @@
 package com.seal.api.gwf.repository;
 
-import com.seal.api.gwf.dto.JobOffer;
 import com.seal.api.gwf.entity.JobOfferEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -58,7 +57,7 @@ public interface JobOfferRepository extends JpaRepository <JobOfferEntity, Integ
     @Modifying
     @Query(value = """
             UPDATE JobOffer
-            SET Status = 0
+            SET OfferEndTime = TRY_CAST(GETDATE()-1 AS DATE)
             WHERE OfferID = ?1""", nativeQuery = true)
     @Transactional
     Integer deleteByID(int id);
