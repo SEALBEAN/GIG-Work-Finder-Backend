@@ -43,10 +43,10 @@ public class BusinessService {
             list.add(mapper.map(j, Business.class));
         }
         int max = list.size();
-        if (quantity>=max || quantity == 0)
+        if (quantity >= max || quantity == 0)
             return list;
-        while (max > quantity){
-            int randomIndex = (int)Math.floor(Math.random()*(max));
+        while (max > quantity) {
+            int randomIndex = (int) Math.floor(Math.random() * (max));
             list.remove(randomIndex);
             max--;
         }
@@ -54,14 +54,16 @@ public class BusinessService {
     }
 
     public Integer createBu(BusinessForm bf) {
-        String fileName = bf.getBusinessLogo().getOriginalFilename();
         String message = "";
         String link = "";
-        try {
-            link = S3Util.uploadFile(fileName, bf.getBusinessLogo().getInputStream());
-            message = "Your file has been uploaded successfully!\n";
-        } catch (Exception ex) {
-            message = "Error uploading file: " + ex.getMessage();
+        if (bf.getBusinessLogo() != null) {
+            try {
+                String fileName = bf.getBusinessLogo().getOriginalFilename();
+                link = S3Util.uploadFile(fileName, bf.getBusinessLogo().getInputStream());
+                message = "Your file has been uploaded successfully!\n";
+            } catch (Exception ex) {
+                message = "Error uploading file: " + ex.getMessage();
+            }
         }
         System.out.println(message);
         int result = businessRepository.addBusiness(bf.getLocationID(), bf.getAccountID(), bf.getAddress(), bf.getBusinessName(),
@@ -71,11 +73,9 @@ public class BusinessService {
 
     public Integer updateBu(BusinessForm bf) {
         BusinessEntity be = businessRepository.getByID(bf.getBusinessID());
-        String fileName = bf.getBusinessLogo().getOriginalFilename();
         String link = "";
-        if (fileName == "")
-            link = be.getBusinessLogo();
-        else {
+        if (bf.getBusinessLogo() != null) {
+            String fileName = bf.getBusinessLogo().getOriginalFilename();
             String message = "";
             try {
                 link = S3Util.uploadFile(fileName, bf.getBusinessLogo().getInputStream());
@@ -84,20 +84,23 @@ public class BusinessService {
                 message = "Error uploading file: " + ex.getMessage();
             }
             System.out.println(message);
+        } else {
+            link = be.getBusinessLogo();
         }
-        if (bf.getLocationID() == null){
+
+        if (bf.getLocationID() == null) {
             bf.setLocationID(be.getLocation().getLocationID());
         }
-        if (bf.getAddress() == null){
+        if (bf.getAddress() == null) {
             bf.setAddress(be.getAddress());
         }
-        if (bf.getBusinessName() == null){
+        if (bf.getBusinessName() == null) {
             bf.setBusinessName(be.getBusinessName());
         }
-        if (bf.getDescription() == null){
+        if (bf.getDescription() == null) {
             bf.setDescription(be.getDescription());
         }
-        if (bf.getBenefit() == null){
+        if (bf.getBenefit() == null) {
             bf.setBenefit(be.getBenefit());
         }
 
