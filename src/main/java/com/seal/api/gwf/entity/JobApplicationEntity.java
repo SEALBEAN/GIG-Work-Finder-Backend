@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 
 
@@ -44,17 +45,17 @@ public class JobApplicationEntity {
     private Integer visual;
 
     @Column(name = "Other")
-    private int other;
+    private String other;
 
     @Column(name = "StartTime")
-    @Temporal(TemporalType.TIME)
-    private Date startTime;
+    private Time startTime;
 
     @Column(name = "EndTime")
-    @Temporal(TemporalType.TIME)
-    private Date endTime;
+    private Time endTime;
 
     @Column(name = "Status")
     private int status;
 
+    @Column(name = "Available")
+    private int available;
 }

@@ -19,11 +19,12 @@ public interface ApplicantRepository extends JpaRepository<ApplicantEntity, Inte
     ApplicantEntity findByEmail(String email);
     @Modifying
     @Query(value = """
-            INSERT INTO Applicant(FirstName, LastName, Gender, Email, Verify, Status, Available)
-            VALUES (:firstName, :lastName, :gender, :email, 1, 1, 0),
+            INSERT INTO Applicant(FirstName, LastName, Gender, Email, Verify, Status)
+            VALUES (:firstName, :lastName, :gender, :email, 1, 1);
             
-            INSERT INTO JobApplication (AccountID, CreatedDate, EndDate, Age)
-            VALUES ((SELECT AccountID FROM Applicant WHERE email = 'xuhet2017@gmail.com'), GetDate(), GetDate()+30, 18)
+            DECLARE @id int = (SELECT AccountID FROM Applicant WHERE email = :email)
+            INSERT INTO JobApplication (AccountID, CreatedDate, EndDate)
+            VALUES (@id, GetDate(), GetDate()+30)
             """,nativeQuery = true)
     @Transactional
     Integer addApplicant(String firstName, String lastName, String gender, String email);
@@ -31,8 +32,13 @@ public interface ApplicantRepository extends JpaRepository<ApplicantEntity, Inte
     @Modifying
     @Query(value = """
             UPDATE Applicant
-            SET LocationID = ?2, DegreeID = ?3, FirstName = ?4, LastName = ?5, Phone = ?6, DOB = ?7, Gender = ?8, Address = ?9, Description = ?10, Available = ?11
-            WHERE AccountID = ?1""", nativeQuery = true)
+            SET LocationID = ?2, DegreeID = ?3, FirstName = ?4, LastName = ?5, Phone = ?6, DOB = ?7, Gender = ?8, Address = ?9, Description = ?10
+            WHERE AccountID = ?1
+            
+            UPDATE JobApplication
+            SET Available = ?11
+            WHERE AccountID = ?1
+            """, nativeQuery = true)
     @Transactional
     int updateApp(int accountID, Integer locationID, Integer degreeID, String firstName, String lastName, String phone, Timestamp dob, String gender, String address, String description, int available);
 }
