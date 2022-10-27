@@ -84,13 +84,13 @@ public class JobOfferController {
             else
                 return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getStackTrace());
         }
 
     }
 
     @PutMapping("/UpdateJO")
-    public ResponseEntity<?> updateJO(@ModelAttribute JobOfferForm joe){
+    public ResponseEntity<?> updateJO(@RequestBody JobOfferForm joe){
         try{
             Integer result = jobOfferService.updateJO(joe);
             if (result == 1)
@@ -98,7 +98,7 @@ public class JobOfferController {
             else
                 return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getStackTrace());
         }
     }
 
@@ -111,7 +111,7 @@ public class JobOfferController {
         else
             return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getStackTrace());
         }
     }
 }

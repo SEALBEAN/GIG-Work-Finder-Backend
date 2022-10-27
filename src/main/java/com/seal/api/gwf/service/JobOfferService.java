@@ -120,23 +120,23 @@ public class JobOfferService {
         JobOfferEntity jo = jobOfferRepository.findByOfferID(joe.getOfferID());
 
         Time startTime;
-        if (joe.getStartTime() != null) {
+        if (joe.getStartTime() == null) {
             startTime = jo.getStartTime();
         } else {
             startTime = Time.valueOf(joe.getStartTime() + ":00");
         }
         Time endTime;
-        if (joe.getEndTime() != null) {
+        if (joe.getEndTime() == null) {
             endTime = jo.getEndTime();
         } else {
             endTime = Time.valueOf(joe.getEndTime() + ":00");
         }
 
         Object offerEndTime;
-        if (joe.getOfferEndTime() != null) {
-            offerEndTime = Timestamp.valueOf(LocalDateTime.parse(joe.getOfferEndTime() + " 00:00:00", Utils.DAYTIMEFORMATDDMMYYYY));
-        } else {
+        if (joe.getOfferEndTime() == null) {
             offerEndTime = jo.getOfferEndTime();
+        } else {
+            offerEndTime = Timestamp.valueOf(LocalDateTime.parse(joe.getOfferEndTime() + " 00:00:00", Utils.DAYTIMEFORMATDDMMYYYY));
         }
         Timestamp createdDate = new Timestamp(System.currentTimeMillis());
 
