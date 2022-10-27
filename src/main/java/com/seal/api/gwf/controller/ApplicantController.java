@@ -24,7 +24,7 @@ public class ApplicantController {
     @GetMapping("/ALL")
     public List<ApplicantEntity> getAllApplicants() {return applicantService.getAllApplicants();}
 
-    @PutMapping("/Update")
+    @PutMapping("/UpdateApp")
     public ResponseEntity<?> updateApp(@RequestBody ApplicantForm app){
         try{
             Integer result = applicantService.updateApp(app);

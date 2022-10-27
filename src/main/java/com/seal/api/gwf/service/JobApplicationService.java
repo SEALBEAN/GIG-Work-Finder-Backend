@@ -23,7 +23,7 @@ public class JobApplicationService {
     }
 
     public Integer updateJA(JobApplicationForm jaf){
-        JobApplicationEntity jae = jobApplicationRepository.findById(jaf.getAccountID()).get();
+        JobApplicationEntity jae = jobApplicationRepository.findByAccountId(jaf.getAccountID());
 
         Time startTime;
         if (jaf.getStartTime() == null) {

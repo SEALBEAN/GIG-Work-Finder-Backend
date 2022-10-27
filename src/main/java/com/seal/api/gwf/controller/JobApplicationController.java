@@ -27,7 +27,7 @@ public class JobApplicationController {
         return jobApplicationService.getAllByOfferID(oid);
     }
 
-    @PostMapping("/UpdateJA")
+    @PutMapping("/UpdateJA")
     public ResponseEntity<?> updateJA(@RequestBody JobApplicationForm jaf) {
         try {
             Integer result = jobApplicationService.updateJA(jaf);
