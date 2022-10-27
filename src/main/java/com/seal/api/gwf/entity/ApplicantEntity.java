@@ -68,9 +68,7 @@ public class ApplicantEntity {
 
     @Column(name = "Description", columnDefinition = "ntext")
     private String description;
-
-    @Column(name = "Available")
-    private int available;
+    
 
     //Ktra lai. ?
 //    @JsonManagedReference
