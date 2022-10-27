@@ -33,4 +33,6 @@ public class ApplicantForm {
     private String address;
 
     private String description;
+
+    private int available;
 }

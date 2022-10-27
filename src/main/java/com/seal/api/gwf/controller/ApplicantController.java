@@ -1,9 +1,7 @@
 package com.seal.api.gwf.controller;
 
 
-import com.seal.api.gwf.dto.Applicant;
 import com.seal.api.gwf.dto.create.ApplicantForm;
-import com.seal.api.gwf.dto.create.JobOfferForm;
 import com.seal.api.gwf.entity.ApplicantEntity;
 import com.seal.api.gwf.service.ApplicantService;
 import org.springframework.beans.factory.annotation.Autowired;

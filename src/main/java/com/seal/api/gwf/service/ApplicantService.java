@@ -1,7 +1,6 @@
 package com.seal.api.gwf.service;
 
 
-import com.seal.api.gwf.dto.Applicant;
 import com.seal.api.gwf.dto.create.ApplicantForm;
 import com.seal.api.gwf.entity.ApplicantEntity;
 import com.seal.api.gwf.repository.ApplicantRepository;
@@ -62,7 +61,7 @@ public class ApplicantService {
                 app.setDescription(appe.getDescription());
         }
         int result = applicantRepository.updateApp(appe.getAccountID(), app.getLocationID(), app.getDegreeID(), app.getFirstName(), app.getLastName(), app.getPhone()
-                                                    ,(Timestamp) dob, app.getGender(), app.getAddress(), app.getDescription());
+                                                    ,(Timestamp) dob, app.getGender(), app.getAddress(), app.getDescription(), app.getAvailable());
         return result;
     }
 

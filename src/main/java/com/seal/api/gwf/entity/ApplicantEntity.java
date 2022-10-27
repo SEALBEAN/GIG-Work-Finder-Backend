@@ -69,6 +69,9 @@ public class ApplicantEntity {
     @Column(name = "Description", columnDefinition = "ntext")
     private String description;
 
+    @Column(name = "Available")
+    private int available;
+
     //Ktra lai. ?
 //    @JsonManagedReference
 //    @OneToMany(mappedBy = "jobOffer",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = CommentEntity.class)
