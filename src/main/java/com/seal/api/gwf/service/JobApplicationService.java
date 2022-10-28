@@ -56,4 +56,7 @@ public class JobApplicationService {
     }
 
 
+    public Integer applyJO(int aid, int oid) {
+        return jobApplicationRepository.applyJO(aid, oid);
+    }
 }

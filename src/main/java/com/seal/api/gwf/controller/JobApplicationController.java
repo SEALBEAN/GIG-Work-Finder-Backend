@@ -33,6 +33,18 @@ public class JobApplicationController {
         return jobApplicationService.getAllByRecruiterID(aid);
     }
 
+    @GetMapping("/ApplyJO/{oid}/{aid}")
+    public ResponseEntity<?> applyJO(@PathVariable int aid, @PathVariable int oid){
+        try {
+            Integer result = jobApplicationService.applyJO(aid,oid);
+            if (result == 1)
+                return ResponseEntity.ok(HttpStatus.OK);
+            else
+                return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getStackTrace());
+        }
+    }
     @PutMapping("/UpdateJA")
     public ResponseEntity<?> updateJA(@RequestBody JobApplicationForm jaf) {
         try {
@@ -44,7 +56,6 @@ public class JobApplicationController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getStackTrace());
         }
-
     }
 
 }

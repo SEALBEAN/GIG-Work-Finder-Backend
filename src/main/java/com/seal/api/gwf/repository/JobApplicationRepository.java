@@ -30,6 +30,11 @@ public interface JobApplicationRepository extends JpaRepository<JobApplicationEn
     JobApplicationEntity findByApplicationId(int applicationID);
 
     @Modifying
+    @Query(value = "INSERT INTO JobMapping(OfferID, ApplicationID) " +
+            "VALUES (:oid, :aid)", nativeQuery = true)
+    @Transactional
+    Integer applyJO(int aid, int oid);
+    @Modifying
     @Query(value = """
             UPDATE JobApplication
             SET CreatedDate = GETDATE(), EndDate = GETDATE()+30, Other = :other, StartTime = :startTime, EndTime = :endTime, Available = :available
@@ -37,6 +42,7 @@ public interface JobApplicationRepository extends JpaRepository<JobApplicationEn
             """, nativeQuery = true)
     @Transactional
     Integer updateJA(int accountID, String other, Time startTime, Time endTime, int available);
+
 
 
 }
