@@ -24,8 +24,9 @@ public class JobApplicationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int applicationID;
 
-    @Column(name = "AccountID")
-    private int accountID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "AccountID")
+    private ApplicantEntity accountID;
 
     @Column(name = "CreatedDate")
     @Temporal(TemporalType.TIMESTAMP)
