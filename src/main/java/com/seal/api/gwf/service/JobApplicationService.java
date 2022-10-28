@@ -51,8 +51,7 @@ public class JobApplicationService {
         if (jaf.getOther() == null) {
             jaf.setOther(jae.getOther());
         }
-        Integer result = jobApplicationRepository.updateJA(jaf.getAccountID(), jaf.getOther(), startTime, endTime, jaf.getAvailable());
-        return result;
+        return jobApplicationRepository.updateJA(jaf.getAccountID(), jaf.getOther(), startTime, endTime, jaf.getAvailable());
     }
 
 
