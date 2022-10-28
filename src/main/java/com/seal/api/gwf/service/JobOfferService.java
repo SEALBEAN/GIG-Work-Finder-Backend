@@ -201,4 +201,8 @@ public class JobOfferService {
         }
         return result;
     }
+
+    public Integer applyJO(int oid, int jaid) {
+        return jobOfferRepository.applyJO(oid, jaid);
+    }
 }

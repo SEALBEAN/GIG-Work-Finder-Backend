@@ -1,6 +1,5 @@
 package com.seal.api.gwf.repository;
 
-import com.seal.api.gwf.dto.get.AllJobApplication;
 import com.seal.api.gwf.entity.JobApplicationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -20,7 +19,7 @@ public interface JobApplicationRepository extends JpaRepository<JobApplicationEn
     @Query(value = """
             SELECT JA.ApplicationID AS ApplicationID, JA.AccountID AS AccountID, JA.CreatedDate AS CreatedDate, EndDate, JA.Salary AS Salary, JA.Visual AS Visual, JA.Other AS Other, JA.StartTime AS StartTime, JA.EndTime AS EndTime, JA.Status AS Status, JA.Age AS Age, Available
             FROM JobApplication  JA
-            INNER JOIN JobMapping JM on JA.ApplicationID = JM.ApplicationID 
+            INNER JOIN JobMapping JM on JA.ApplicationID = JM.ApplicationID
             INNER JOIN JobOffer JO on JM.OfferID = JO.OfferID
             WHERE JM.OfferID = ?1
             """, nativeQuery = true)
@@ -30,10 +29,10 @@ public interface JobApplicationRepository extends JpaRepository<JobApplicationEn
     JobApplicationEntity findByApplicationId(int applicationID);
 
     @Modifying
-    @Query(value = "INSERT INTO JobMapping(OfferID, ApplicationID) " +
-            "VALUES (:oid, :aid)", nativeQuery = true)
+    @Query(value = "INSERT INTO JobMapping(OfferID, ApplicationID, AccountID) " +
+            "VALUES (:oid, :jaid, :aid)", nativeQuery = true)
     @Transactional
-    Integer applyJO(int aid, int oid);
+    Integer applyJA(Integer oid, int jaid, int aid);
     @Modifying
     @Query(value = """
             UPDATE JobApplication

@@ -1,7 +1,6 @@
 package com.seal.api.gwf.controller;
 
 import com.seal.api.gwf.dto.create.JobApplicationForm;
-import com.seal.api.gwf.dto.create.JobOfferForm;
 import com.seal.api.gwf.dto.get.AllJobApplication;
 import com.seal.api.gwf.entity.JobApplicationEntity;
 import com.seal.api.gwf.service.JobApplicationService;
@@ -33,10 +32,12 @@ public class JobApplicationController {
         return jobApplicationService.getAllByRecruiterID(aid);
     }
 
-    @GetMapping("/ApplyJO/{oid}/{aid}")
-    public ResponseEntity<?> applyJO(@PathVariable int aid, @PathVariable int oid){
+    @GetMapping("/ApplyJA")
+    public ResponseEntity<?> applyJA(@RequestParam(value = "oid", required = false) Integer oid,
+                                     @RequestParam(value = "jaid") int jaid,
+                                     @RequestParam(value = "aid") int aid){
         try {
-            Integer result = jobApplicationService.applyJO(aid,oid);
+            Integer result = jobApplicationService.applyJA(oid, jaid, aid);
             if (result == 1)
                 return ResponseEntity.ok(HttpStatus.OK);
             else

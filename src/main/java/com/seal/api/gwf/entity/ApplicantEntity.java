@@ -9,6 +9,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Getter
@@ -68,7 +70,10 @@ public class ApplicantEntity {
 
     @Column(name = "Description", columnDefinition = "ntext")
     private String description;
-    
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "accountID",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = JobApplicationEntity.class)
+    private Set<JobApplicationEntity> jobApplications = new HashSet<>();
 
     //Ktra lai. ?
 //    @JsonManagedReference

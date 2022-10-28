@@ -1,6 +1,7 @@
 package com.seal.api.gwf.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class JobApplicationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int applicationID;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "AccountID")
     private ApplicantEntity accountID;
