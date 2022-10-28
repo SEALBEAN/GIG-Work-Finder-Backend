@@ -1,5 +1,6 @@
 package com.seal.api.gwf.repository;
 
+import com.seal.api.gwf.dto.get.AllJobApplication;
 import com.seal.api.gwf.entity.JobApplicationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -25,8 +26,8 @@ public interface JobApplicationRepository extends JpaRepository<JobApplicationEn
             """, nativeQuery = true)
     List<JobApplicationEntity> getAllByOfferID(int offerID);
 
-    @Query(value = "SELECT * FROM JobApplication WHERE AccountID = ?1", nativeQuery = true)
-    JobApplicationEntity findByAccountId(int accountID);
+    @Query(value = "SELECT * FROM JobApplication WHERE ApplicationID = ?1", nativeQuery = true)
+    JobApplicationEntity findByApplicationId(int applicationID);
 
     @Modifying
     @Query(value = """

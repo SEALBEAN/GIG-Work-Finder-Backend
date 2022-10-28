@@ -2,6 +2,7 @@ package com.seal.api.gwf.controller;
 
 import com.seal.api.gwf.dto.create.JobApplicationForm;
 import com.seal.api.gwf.dto.create.JobOfferForm;
+import com.seal.api.gwf.dto.get.AllJobApplication;
 import com.seal.api.gwf.entity.JobApplicationEntity;
 import com.seal.api.gwf.service.JobApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,11 @@ public class JobApplicationController {
     @GetMapping("/OfferID/{oid}")
     public List<JobApplicationEntity> getAllByOfferID(@PathVariable int oid){
         return jobApplicationService.getAllByOfferID(oid);
+    }
+
+    @GetMapping("/RID/{aid}")
+    public List<AllJobApplication> getAllByAID(@PathVariable int aid){
+        return jobApplicationService.getAllByRecruiterID(aid);
     }
 
     @PutMapping("/UpdateJA")
