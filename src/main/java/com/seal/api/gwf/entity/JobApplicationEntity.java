@@ -42,7 +42,7 @@ public class JobApplicationEntity {
     private Integer salary;
 
     @Column(name = "Age")
-    private int age;
+    private Integer age;
 
     @Column(name = "Visual")
     private Integer visual;

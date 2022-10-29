@@ -23,12 +23,13 @@ public class JobApplication {
 
     public List<AllJobApplication> getAllJAByRecruiterID(int aid){
         String sql = """
-            SELECT JA.ApplicationID, A.FirstName, A.LastName, JT.Name, B.BusinessName, B.Address, JO.Address FROM JobOffer JO 
-            FULL JOIN Business B on JO.BusinessID = B.BusinessID
-            FULL JOIN JobType JT on JO.TypeID = JT.TypeID
-            FULL JOIN JobMapping JM on JO.OfferID = JM.OfferID
-            FULL JOIN JobApplication JA on JM.ApplicationID = JA.ApplicationID
-            FULL JOIN Applicant A on JA.AccountID = A.AccountID
+            SELECT JA.ApplicationID, A.FirstName, A.LastName, JT.Name, B.BusinessName, B.Address, JO.Address 
+            FROM JobOffer JO 
+            INNER JOIN JobMapping JM on JO.OfferID = JM.OfferID
+            INNER JOIN JobApplication JA on JM.ApplicationID = JA.ApplicationID
+            INNER JOIN Applicant A on JA.AccountID = A.AccountID
+            INNER JOIN Business B on JO.BusinessID = B.BusinessID
+            INNER JOIN JobType JT on JO.TypeID = JT.TypeID
             WHERE JO.AccountID = 
             """ + aid;
         List<AllJobApplication> result = jdbcTemplate.query(sql, new RowMapper<AllJobApplication>(){
