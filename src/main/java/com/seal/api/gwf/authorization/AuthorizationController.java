@@ -31,7 +31,7 @@ public class AuthorizationController {
 //        }
 //        if (googleData == null ) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Fail idToken!");
 //        else
-            return ResponseEntity.ok(authorizationService.CheckAndAuthorizationWithEmail(data));
+            return ResponseEntity.ok(authorizationService.CheckAndAuthenticationWithEmail(data));
     }
     @PostMapping("/google-verifier")
     public ResponseEntity GoogleVerifier(@RequestHeader(value = "Authorization") String idToken){

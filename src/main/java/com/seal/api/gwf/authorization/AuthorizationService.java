@@ -30,8 +30,9 @@ public class AuthorizationService {
     CryptionService cryptionService;
 
 
-    public Data CheckAndAuthorizationWithEmail(Data data){
+    public Data CheckAndAuthenticationWithEmail(Data data){
         String result = "";
+        boolean isCreateNew = false;
         String email =data.getEmail();
         String role = data.getRole();
         String picUrl = data.getPicUrl();
@@ -42,7 +43,7 @@ public class AuthorizationService {
         token.setRole(role);
         token.setPicUrl(picUrl);
         System.out.println(token);
-        try{
+//        try{
         if ("Recruiter".equals(role)){
             RecruiterEntity recruiterEntity =  recruiterRepository.findByEmail(email);
             if (recruiterEntity == null) {
@@ -50,6 +51,7 @@ public class AuthorizationService {
                         name.substring(name.indexOf(" ") + 1, name.length()),name.substring(0,name.indexOf(" ")),
                         data.getGender(), data.getEmail());
                 recruiterEntity =  recruiterRepository.findByEmail(email);
+                isCreateNew = true;
             }
             // have account in database
             token.setId(recruiterEntity.getAccountID());
@@ -65,6 +67,7 @@ public class AuthorizationService {
                         name.substring(name.indexOf(" ") + 1, name.length()),name.substring(0,name.indexOf(" ")),
                         data.getGender(), data.getEmail());
                 applicantEntity =  applicantRepository.findByEmail(email);
+                isCreateNew = true;
             }
             token.setId(applicantEntity.getAccountID());
             token.setName(applicantEntity.getFirstName() + " " + applicantEntity.getLastName());
@@ -77,14 +80,17 @@ public class AuthorizationService {
             token.setName(adminEntity.getFirstName() + " " + adminEntity.getLastName());
             token.setGender(adminEntity.getGender());
         }
-        } catch (Exception ex){
-            System.out.println("handle Email unit key");
-            //handle email Unit Key
-        }
+//        } catch (Exception ex){
+//            System.out.println("handle Email unit key: " + ex.getMessage());
+//            //handle email Unit Key
+//        }
         //set data
         String tokenString =  cryptionService.encode(token);
         data.setId(token.getId());
         data.setToken(tokenString);
+        data.setCreateNew(isCreateNew);
+        System.out.println("data" + data);
+        System.out.println("is create" + isCreateNew);
         return data;
     }
 }

@@ -12,4 +12,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Data extends Token {
         private String token;
+        private boolean isCreateNew = false;
 }
