@@ -69,6 +69,18 @@ public class JobOfferController {
     @GetMapping("/GetAllJOUnActive/{aid}")
     public List<JobOffer> getAllJobOffersByAIDUnActive(@PathVariable int aid) {return jobOfferService.getAllJobOffersByAIDStatus(aid ,0);}
 
+    @GetMapping("/ApplyJO/{oid}/{jaid}")
+    public ResponseEntity<?> applyJA(@PathVariable int oid, @PathVariable int jaid){
+        try {
+            Integer result = jobOfferService.applyJO(oid, jaid);
+            if (result == 1)
+                return ResponseEntity.ok(HttpStatus.OK);
+            else
+                return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getStackTrace());
+        }
+    }
 
     @GetMapping("/CreateJO/{id}")
     public CreateJOService.CreateJO getInfo(@PathVariable int id){

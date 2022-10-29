@@ -110,10 +110,9 @@ public class JobOfferService {
         LocalDateTime d = LocalDateTime.parse(joe.getOfferEndTime() + " 00:00:00", Utils.DAYTIMEFORMATDDMMYYYY);
         offerEndTime = Timestamp.valueOf(d);
         Timestamp createdDate = new Timestamp(System.currentTimeMillis());
-        int result = jobOfferRepository.addJobOffer(joe.getAccountID(), joe.getJobType(), joe.getLocation(), joe.getDegree(), joe.getNumOfRecruit()
+        return jobOfferRepository.addJobOffer(joe.getAccountID(), joe.getJobType(), joe.getLocation(), joe.getDegree(), joe.getNumOfRecruit()
                 , offerEndTime, createdDate, joe.getSalary(), joe.getAge(), joe.getJobDescription(), joe.getOther(), startTime, endTime
                 , joe.getAddress(), joe.getBusiness(), null);
-        return result;
     }
 
     public Integer updateJO(JobOfferForm joe) {
@@ -175,10 +174,9 @@ public class JobOfferService {
         if (joe.getAddress() == null) {
             joe.setAddress(jo.getAddress());
         }
-        int result = jobOfferRepository.updateJobOffer(joe.getOfferID(), joe.getJobType(), joe.getLocation(), joe.getDegree(), joe.getNumOfRecruit()
+        return jobOfferRepository.updateJobOffer(joe.getOfferID(), joe.getJobType(), joe.getLocation(), joe.getDegree(), joe.getNumOfRecruit()
                 , offerEndTime, createdDate, joe.getSalary(), joe.getAge(), joe.getJobDescription(), joe.getOther(), startTime, endTime
                 , joe.getAddress(), joe.getBusiness());
-        return result;
     }
 
     public Integer deleteJO(int id) {return jobOfferRepository.deleteByID(id);
@@ -200,5 +198,9 @@ public class JobOfferService {
             result.add(mapper.map(jo, JobOffer.class));
         }
         return result;
+    }
+
+    public Integer applyJO(int oid, int jaid) {
+        return jobOfferRepository.applyJO(oid, jaid);
     }
 }

@@ -1,7 +1,7 @@
 package com.seal.api.gwf.controller;
 
 import com.seal.api.gwf.dto.create.JobApplicationForm;
-import com.seal.api.gwf.dto.create.JobOfferForm;
+import com.seal.api.gwf.dto.get.AllJobApplication;
 import com.seal.api.gwf.entity.JobApplicationEntity;
 import com.seal.api.gwf.service.JobApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,26 @@ public class JobApplicationController {
         return jobApplicationService.getAllByOfferID(oid);
     }
 
-    @PostMapping("/UpdateJA")
+    @GetMapping("/RID/{aid}")
+    public List<AllJobApplication> getAllByAID(@PathVariable int aid){
+        return jobApplicationService.getAllByRecruiterID(aid);
+    }
+
+    @GetMapping("/ApplyJA")
+    public ResponseEntity<?> applyJA(@RequestParam(value = "oid", required = false) Integer oid,
+                                     @RequestParam(value = "jaid") int jaid,
+                                     @RequestParam(value = "aid") int aid){
+        try {
+            Integer result = jobApplicationService.applyJA(oid, jaid, aid);
+            if (result == 1)
+                return ResponseEntity.ok(HttpStatus.OK);
+            else
+                return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getStackTrace());
+        }
+    }
+    @PutMapping("/UpdateJA")
     public ResponseEntity<?> updateJA(@RequestBody JobApplicationForm jaf) {
         try {
             Integer result = jobApplicationService.updateJA(jaf);
@@ -38,7 +57,6 @@ public class JobApplicationController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getStackTrace());
         }
-
     }
 
 }

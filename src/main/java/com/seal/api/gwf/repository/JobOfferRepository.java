@@ -63,4 +63,9 @@ public interface JobOfferRepository extends JpaRepository <JobOfferEntity, Integ
     Integer deleteByID(int id);
 
 
+    @Modifying
+    @Query(value = "INSERT INTO JobMapping(OfferID, ApplicationID) " +
+            "VALUES (:oid, :jaid)", nativeQuery = true)
+    @Transactional
+    Integer applyJO(int oid, int jaid);
 }

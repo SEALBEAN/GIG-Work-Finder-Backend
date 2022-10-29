@@ -1,6 +1,8 @@
 package com.seal.api.gwf.service;
 
+import com.seal.api.gwf.dao.JobApplication;
 import com.seal.api.gwf.dto.create.JobApplicationForm;
+import com.seal.api.gwf.dto.get.AllJobApplication;
 import com.seal.api.gwf.entity.JobApplicationEntity;
 import com.seal.api.gwf.repository.JobApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,10 @@ public class JobApplicationService {
     @Autowired
     JobApplicationRepository jobApplicationRepository;
 
+    @Autowired
+    JobApplication jobApplication;
+
+
     public List<JobApplicationEntity> getAll() {
         return jobApplicationRepository.getAll();
     }
@@ -22,8 +28,12 @@ public class JobApplicationService {
         return jobApplicationRepository.getAllByOfferID(offerID);
     }
 
+    public List<AllJobApplication> getAllByRecruiterID(int aid) {
+        return jobApplication.getAllJAByRecruiterID(aid);
+    }
+
     public Integer updateJA(JobApplicationForm jaf){
-        JobApplicationEntity jae = jobApplicationRepository.findById(jaf.getAccountID()).get();
+        JobApplicationEntity jae = jobApplicationRepository.findByApplicationId(jaf.getApplicationID());
 
         Time startTime;
         if (jaf.getStartTime() == null) {
@@ -41,7 +51,11 @@ public class JobApplicationService {
         if (jaf.getOther() == null) {
             jaf.setOther(jae.getOther());
         }
-        Integer result = jobApplicationRepository.updateJA(jaf.getAccountID(), jaf.getOther(), startTime, endTime, jaf.getAvailable());
-        return result;
+        return jobApplicationRepository.updateJA(jaf.getAccountID(), jaf.getOther(), startTime, endTime, jaf.getAvailable());
+    }
+
+
+    public Integer applyJA(Integer oid, int jaid, int aid) {
+        return jobApplicationRepository.applyJA(oid, jaid, aid);
     }
 }

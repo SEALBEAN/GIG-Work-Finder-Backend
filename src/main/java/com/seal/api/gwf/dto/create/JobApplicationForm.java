@@ -12,6 +12,7 @@ import java.sql.Time;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobApplicationForm {
+    private int applicationID;
     private int accountID;
     private String other;
     private Time startTime;
