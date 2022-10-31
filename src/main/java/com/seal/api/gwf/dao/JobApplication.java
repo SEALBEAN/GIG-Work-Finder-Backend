@@ -2,7 +2,6 @@ package com.seal.api.gwf.dao;
 
 import com.seal.api.gwf.dto.get.AllJobApplication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,8 +22,8 @@ public class JobApplication {
 
     public List<AllJobApplication> getAllJAByRecruiterID(int aid){
         String sql = """
-            SELECT JA.ApplicationID, A.FirstName, A.LastName, JT.Name, B.BusinessName, B.Address, JO.Address 
-            FROM JobOffer JO 
+            SELECT JA.ApplicationID, A.FirstName, A.LastName, JT.Name, B.BusinessName, B.Address, JO.Address, JA.AccountID, JO.OfferID
+            FROM JobOffer JO
             INNER JOIN JobMapping JM on JO.OfferID = JM.OfferID
             INNER JOIN JobApplication JA on JM.ApplicationID = JA.ApplicationID
             INNER JOIN Applicant A on JA.AccountID = A.AccountID
@@ -32,7 +31,7 @@ public class JobApplication {
             INNER JOIN JobType JT on JO.TypeID = JT.TypeID
             WHERE JO.AccountID = 
             """ + aid;
-        List<AllJobApplication> result = jdbcTemplate.query(sql, new RowMapper<AllJobApplication>(){
+        List<AllJobApplication> result = jdbcTemplate.query(sql, new RowMapper<>(){
             @Override
             public AllJobApplication mapRow(ResultSet rs, int rowNum) throws SQLException {
                 AllJobApplication ja = new AllJobApplication();
@@ -44,6 +43,8 @@ public class JobApplication {
                 ja.setBusinessName(rs.getString(5));
                 ja.setBusinessAddress(rs.getString(6));
                 ja.setJoAddress(rs.getString(7));
+                ja.setAccountID(rs.getInt(8));
+                ja.setOfferID(rs.getInt(9));
 
                 return ja;
             }
