@@ -69,8 +69,9 @@ public class JobOfferController {
     @GetMapping("/GetAllJOUnActive/{aid}")
     public List<JobOffer> getAllJobOffersByAIDUnActive(@PathVariable int aid) {return jobOfferService.getAllJobOffersByAIDStatus(aid ,0);}
 
-    @GetMapping("/ApplyJO/{oid}/{jaid}")
-    public ResponseEntity<?> applyJA(@PathVariable int oid, @PathVariable int jaid){
+    @PostMapping("/ApplyJO")
+    public ResponseEntity<?> applyJA(@RequestParam(value = "oid") int oid,
+                                     @RequestParam(value = "jaid") int jaid){
         try {
             Integer result = jobOfferService.applyJO(oid, jaid);
             if (result == 1)

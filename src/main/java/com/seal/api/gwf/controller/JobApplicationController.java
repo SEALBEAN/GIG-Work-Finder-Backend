@@ -32,7 +32,7 @@ public class JobApplicationController {
         return jobApplicationService.getAllByRecruiterID(aid);
     }
 
-    @GetMapping("/ApplyJA")
+    @PostMapping("/ApplyJA")
     public ResponseEntity<?> applyJA(@RequestParam(value = "oid", required = false) Integer oid,
                                      @RequestParam(value = "jaid") int jaid,
                                      @RequestParam(value = "aid") int aid){
