@@ -1,6 +1,7 @@
 package com.seal.api.gwf.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -71,7 +72,7 @@ public class ApplicantEntity {
     @Column(name = "Description", columnDefinition = "ntext")
     private String description;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "accountID",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = JobApplicationEntity.class)
     private Set<JobApplicationEntity> jobApplications = new HashSet<>();
 
