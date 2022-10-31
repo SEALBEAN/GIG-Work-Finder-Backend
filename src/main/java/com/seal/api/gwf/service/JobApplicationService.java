@@ -1,8 +1,10 @@
 package com.seal.api.gwf.service;
 
 import com.seal.api.gwf.dao.JobApplication;
+import com.seal.api.gwf.dao.JobOffer;
 import com.seal.api.gwf.dto.create.JobApplicationForm;
 import com.seal.api.gwf.dto.get.AllJobApplication;
+import com.seal.api.gwf.dto.get.AllJobOffer;
 import com.seal.api.gwf.entity.JobApplicationEntity;
 import com.seal.api.gwf.repository.JobApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class JobApplicationService {
     @Autowired
     JobApplication jobApplication;
 
+    @Autowired
+    JobOffer jobOffer;
+
 
     public List<JobApplicationEntity> getAll() {
         return jobApplicationRepository.getAll();
@@ -30,6 +35,10 @@ public class JobApplicationService {
 
     public List<AllJobApplication> getAllByRecruiterID(int aid) {
         return jobApplication.getAllJAByRecruiterID(aid);
+    }
+
+    public List<AllJobOffer> getAllByApplicantID(int aid) {
+        return jobOffer.getAllByApplicantID(aid);
     }
 
     public Integer updateJA(JobApplicationForm jaf){
