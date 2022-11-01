@@ -17,4 +17,7 @@ public class AllJobApplication {
     private String businessName;
     private String businessAddress;
     private String joAddress;
+    private int accountID;
+    private int offerID;
+    private int mapID;
 }
