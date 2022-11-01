@@ -22,7 +22,7 @@ public class JobOffer {
 
     public List<AllJobOffer> getAllByApplicantID(int aid){
         String sql = """
-            SELECT JO.OfferID AS OfferID, JO.AccountID AS AccountID, TypeID, LocationID, DegreeID, NumOfRecruit, OfferEndTime, Salary, Age, Visual, JobDescription, Other, StartTime, EndTime, Address, BusinessID, Status, State, ApplicationID
+            SELECT JO.OfferID AS OfferID, JO.AccountID AS AccountID, TypeID, LocationID, DegreeID, NumOfRecruit, OfferEndTime, Salary, Age, Visual, JobDescription, Other, StartTime, EndTime, Address, BusinessID, Status, State, ApplicationID, MapID
             FROM JobMapping JM
             INNER JOIN JobOffer JO ON JM.OfferID = JO.OfferID
             WHERE JM.ApplicationID IN
@@ -53,6 +53,7 @@ public class JobOffer {
                 ja.setStatus(rs.getInt(17));
                 ja.setState(rs.getInt(18));
                 ja.setApplicationID(rs.getInt(19));
+                ja.setMapID(rs.getInt(20));
                 return ja;
             }
         });
