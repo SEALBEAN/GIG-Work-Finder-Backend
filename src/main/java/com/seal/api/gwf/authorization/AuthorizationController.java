@@ -20,8 +20,6 @@ public class AuthorizationController {
         String idTokenString;
         if (data.getToken().trim().indexOf(' ') != -1)
             idTokenString = data.getToken().split(" ")[1].trim();
-        System.out.println(data);
-
 //        try {
 //            googleData = GoogleApiVerifier.VerifyGoogleToken(idTokenString);
 //        } catch (IOException exception){
@@ -31,7 +29,12 @@ public class AuthorizationController {
 //        }
 //        if (googleData == null ) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Fail idToken!");
 //        else
+//        try {
             return ResponseEntity.ok(authorizationService.CheckAndAuthenticationWithEmail(data));
+//        }
+//        catch (Exception ex){
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+//        }
     }
     @PostMapping("/google-verifier")
     public ResponseEntity GoogleVerifier(@RequestHeader(value = "Authorization") String idToken){

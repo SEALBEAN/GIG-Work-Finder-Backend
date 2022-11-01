@@ -34,6 +34,7 @@ public class AuthorizationService {
         String result = "";
         boolean isCreateNew = false;
         String email =data.getEmail();
+        System.out.println(email);
         String role = data.getRole();
         String picUrl = data.getPicUrl();
         String name = data.getName();
@@ -43,47 +44,50 @@ public class AuthorizationService {
         token.setRole(role);
         token.setPicUrl(picUrl);
         System.out.println(token);
-//        try{
-        if ("Recruiter".equals(role)){
-            RecruiterEntity recruiterEntity =  recruiterRepository.findByEmail(email);
-            if (recruiterEntity == null) {
-                recruiterRepository.addRecruiter(
-                        name.substring(name.indexOf(" ") + 1, name.length()),name.substring(0,name.indexOf(" ")),
-                        data.getGender(), data.getEmail());
-                recruiterEntity =  recruiterRepository.findByEmail(email);
-                isCreateNew = true;
+        try {
+            if ("Recruiter".equals(role)) {
+                System.out.println("ID 0");
+
+                RecruiterEntity recruiterEntity = recruiterRepository.findByEmail(email);
+                System.out.println("ID 1");
+
+                if (recruiterEntity == null) {
+                    isCreateNew = true;
+                    recruiterRepository.addRecruiter(
+                            name.substring(name.indexOf(" ") + 1, name.length()), name.substring(0, name.indexOf(" ")),
+                            data.getGender(), data.getEmail());
+                    recruiterEntity = recruiterRepository.findByEmail(email);
+
+                }
+                // have account in database
+
+                token.setId(recruiterEntity.getAccountID());
+
+                token.setName(recruiterEntity.getFirstName() + " " + recruiterEntity.getLastName());
+                token.setGender(recruiterEntity.getGender());
+            } else if ("Applicant".equals(role)) {
+                ApplicantEntity applicantEntity = applicantRepository.findByEmail(email);
+                if (applicantEntity == null) {
+                    isCreateNew = true;
+                    //doesn't has account -> create
+                    applicantRepository.addApplicant(
+                            name.substring(name.indexOf(" ") + 1, name.length()), name.substring(0, name.indexOf(" ")),
+                            data.getGender(), data.getEmail());
+                    applicantEntity = applicantRepository.findByEmail(email);
+
+                }
+                token.setId(applicantEntity.getAccountID());
+                token.setName(applicantEntity.getFirstName() + " " + applicantEntity.getLastName());
+                token.setGender(applicantEntity.getGender());
+            } else if ("Admin".equals(role)) {
+                AdminEntity adminEntity = adminRepository.findByEmail(email);
+                token.setId(adminEntity.getAccountID());
+                token.setName(adminEntity.getFirstName() + " " + adminEntity.getLastName());
+                token.setGender(adminEntity.getGender());
             }
-            // have account in database
-            token.setId(recruiterEntity.getAccountID());
-            token.setName(recruiterEntity.getFirstName() + " " + recruiterEntity.getLastName());
-            token.setGender(recruiterEntity.getGender());
-        } else
-        if ("Applicant".equals(role))
-        {
-            ApplicantEntity applicantEntity =  applicantRepository.findByEmail(email);
-            if (applicantEntity == null) {
-                //doesn't has account -> create
-                applicantRepository.addApplicant(
-                        name.substring(name.indexOf(" ") + 1, name.length()),name.substring(0,name.indexOf(" ")),
-                        data.getGender(), data.getEmail());
-                applicantEntity =  applicantRepository.findByEmail(email);
-                isCreateNew = true;
-            }
-            token.setId(applicantEntity.getAccountID());
-            token.setName(applicantEntity.getFirstName() + " " + applicantEntity.getLastName());
-            token.setGender(applicantEntity.getGender());
+        } catch (Exception ex){
+            System.out.println("AuthorizationService - " + ex.getMessage());
         }
-        else if ("Admin".equals(role))
-        {
-            AdminEntity adminEntity =  adminRepository.findByEmail(email);
-            token.setId(adminEntity.getAccountID());
-            token.setName(adminEntity.getFirstName() + " " + adminEntity.getLastName());
-            token.setGender(adminEntity.getGender());
-        }
-//        } catch (Exception ex){
-//            System.out.println("handle Email unit key: " + ex.getMessage());
-//            //handle email Unit Key
-//        }
         //set data
         String tokenString =  cryptionService.encode(token);
         data.setId(token.getId());
