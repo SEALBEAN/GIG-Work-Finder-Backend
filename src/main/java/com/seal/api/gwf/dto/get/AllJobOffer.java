@@ -50,4 +50,6 @@ public class AllJobOffer {
     private int state;
 
     private int applicationID;
+
+    private int mapID;
 }
