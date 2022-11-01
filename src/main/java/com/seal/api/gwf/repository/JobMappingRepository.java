@@ -13,7 +13,7 @@ public interface JobMappingRepository extends JpaRepository<JobMappingEntity, In
     @Modifying
     @Query(value = """
             UPDATE JobMapping
-            SET State = 1
+            SET State = 1s
             WHERE MapID = ?1""" , nativeQuery = true)
     @Transactional
     Integer confirm(int mid);

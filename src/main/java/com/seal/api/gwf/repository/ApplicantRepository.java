@@ -19,15 +19,15 @@ public interface ApplicantRepository extends JpaRepository<ApplicantEntity, Inte
     ApplicantEntity findByEmail(String email);
     @Modifying
     @Query(value = """
-            INSERT INTO Applicant(FirstName, LastName, Gender, Email, Verify, Status)
-            VALUES (:firstName, :lastName, :gender, :email, 1, 1);
+            INSERT INTO Applicant(FirstName, LastName, Gender, Email, Verify, Status, Avatar)
+            VALUES (:firstName, :lastName, :gender, :email, 1, 1, :avatar);
             
             DECLARE @id int = (SELECT AccountID FROM Applicant WHERE email = :email)
             INSERT INTO JobApplication (AccountID, CreatedDate, EndDate)
             VALUES (@id, GetDate(), GetDate()+30)
             """,nativeQuery = true)
     @Transactional
-    Integer addApplicant(String firstName, String lastName, String gender, String email);
+    Integer addApplicant(String firstName, String lastName, String gender, String email, String avatar);
 
     @Modifying
     @Query(value = """

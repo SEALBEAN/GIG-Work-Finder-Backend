@@ -55,7 +55,7 @@ public class AuthorizationService {
                     isCreateNew = true;
                     recruiterRepository.addRecruiter(
                             name.substring(name.indexOf(" ") + 1, name.length()), name.substring(0, name.indexOf(" ")),
-                            data.getGender(), data.getEmail());
+                            data.getGender(), email, picUrl);
                     recruiterEntity = recruiterRepository.findByEmail(email);
 
                 }
@@ -72,7 +72,7 @@ public class AuthorizationService {
                     //doesn't has account -> create
                     applicantRepository.addApplicant(
                             name.substring(name.indexOf(" ") + 1, name.length()), name.substring(0, name.indexOf(" ")),
-                            data.getGender(), data.getEmail());
+                            data.getGender(), data.getEmail(),picUrl);
                     applicantEntity = applicantRepository.findByEmail(email);
 
                 }
