@@ -72,6 +72,9 @@ public class ApplicantEntity {
     @Column(name = "Description", columnDefinition = "ntext")
     private String description;
 
+    @Column(name = "Avatar")
+    private String avatar;
+
     @JsonBackReference
     @OneToMany(mappedBy = "accountID",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = JobApplicationEntity.class)
     private Set<JobApplicationEntity> jobApplications = new HashSet<>();

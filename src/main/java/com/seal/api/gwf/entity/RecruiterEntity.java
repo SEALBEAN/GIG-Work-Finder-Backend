@@ -57,6 +57,9 @@ public class RecruiterEntity {
     @Column(name = "Description", columnDefinition = "ntext")
     private String description;
 
+    @Column(name = "Avatar")
+    private String avatar;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "accountID",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = ReviewDetailEntity.class)
     private Set<ReviewDetailEntity> reviewDetailEntities = new HashSet<>();
