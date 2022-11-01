@@ -20,4 +20,5 @@ public class AllJobApplication {
     private int accountID;
     private int offerID;
     private int mapID;
+    private int state;
 }

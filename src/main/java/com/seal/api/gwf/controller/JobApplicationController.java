@@ -28,10 +28,21 @@ public class JobApplicationController {
         return jobApplicationService.getAllByOfferID(oid);
     }
 
-    @GetMapping("/RID/{aid}")
-    public List<AllJobApplication> getAllByRID(@PathVariable int aid){
-        return jobApplicationService.getAllByRecruiterID(aid);
+    @GetMapping("/RIDUnValid/{aid}")
+    public List<AllJobApplication> getAllJAByRecruiterIDUnValid(@PathVariable int aid){
+        return jobApplicationService.getAllJAByRecruiterIDUnValid(aid);
     }
+
+    @GetMapping("/RIDValid/{aid}")
+    public List<AllJobApplication> getAllJAByRecruiterIDValid(@PathVariable int aid){
+        return jobApplicationService.getAllJAByRecruiterIDValid(aid);
+    }
+
+    @GetMapping("/RIDFinish/{aid}")
+    public List<AllJobApplication> getAllJAByRecruiterIDFinish(@PathVariable int aid){
+        return jobApplicationService.getAllJAByRecruiterIDFinish(aid);
+    }
+
 
     @GetMapping("/AppID/{aid}")
     public List<AllJobOffer> getAllByAppID(@PathVariable int aid){

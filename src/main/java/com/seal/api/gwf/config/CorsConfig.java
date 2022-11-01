@@ -12,7 +12,7 @@ public class CorsConfig {
     private String localhost;
 
     @Value("${allowed.origin1}")
-    private String allowedOrigin1;
+    private String vercel;
 
     @Bean
     public WebMvcConfigurer getCorsConfiguration(){
@@ -20,7 +20,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins(localhost)
+                        .allowedOrigins(localhost, vercel)
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }
