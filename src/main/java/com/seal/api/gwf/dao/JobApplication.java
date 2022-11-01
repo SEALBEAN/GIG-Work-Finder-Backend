@@ -22,7 +22,7 @@ public class JobApplication {
 
     public List<AllJobApplication> getAllJAByRecruiterIDUnValid(int aid){
         String sql = """
-            SELECT JA.ApplicationID, A.FirstName, A.LastName, JT.Name, B.BusinessName, B.Address, JO.Address, JA.AccountID, JO.OfferID, JM.State
+            SELECT JA.ApplicationID, A.FirstName, A.LastName, JT.Name, B.BusinessName, B.Address, JO.Address, JA.AccountID, JO.OfferID, State, MapID
             FROM JobOffer JO
             INNER JOIN JobMapping JM on JO.OfferID = JM.OfferID
             INNER JOIN JobApplication JA on JM.ApplicationID = JA.ApplicationID
@@ -46,6 +46,7 @@ public class JobApplication {
                 ja.setAccountID(rs.getInt(8));
                 ja.setOfferID(rs.getInt(9));
                 ja.setState(rs.getInt(10));
+                ja.setMapID(rs.getInt(11));
 
                 return ja;
             }
@@ -56,7 +57,7 @@ public class JobApplication {
 
     public List<AllJobApplication> getAllJAByRecruiterIDValid(int aid){
         String sql = """
-            SELECT JA.ApplicationID, A.FirstName, A.LastName, JT.Name, B.BusinessName, B.Address, JO.Address, JA.AccountID, JO.OfferID, JM.State
+            SELECT JA.ApplicationID, A.FirstName, A.LastName, JT.Name, B.BusinessName, B.Address, JO.Address, JA.AccountID, JO.OfferID, State, MapID
             FROM JobOffer JO
             INNER JOIN JobMapping JM on JO.OfferID = JM.OfferID
             INNER JOIN JobApplication JA on JM.ApplicationID = JA.ApplicationID
@@ -80,6 +81,7 @@ public class JobApplication {
                 ja.setAccountID(rs.getInt(8));
                 ja.setOfferID(rs.getInt(9));
                 ja.setState(rs.getInt(10));
+                ja.setMapID(rs.getInt(11));
 
                 return ja;
             }
@@ -90,7 +92,7 @@ public class JobApplication {
 
     public List<AllJobApplication> getAllJAByRecruiterIDFinish(int aid){
         String sql = """
-            SELECT JA.ApplicationID, A.FirstName, A.LastName, JT.Name, B.BusinessName, B.Address, JO.Address, JA.AccountID, JO.OfferID, JM.State
+            SELECT JA.ApplicationID, A.FirstName, A.LastName, JT.Name, B.BusinessName, B.Address, JO.Address, JA.AccountID, JO.OfferID, State, MapID
             FROM JobOffer JO
             INNER JOIN JobMapping JM on JO.OfferID = JM.OfferID
             INNER JOIN JobApplication JA on JM.ApplicationID = JA.ApplicationID
@@ -114,6 +116,7 @@ public class JobApplication {
                 ja.setAccountID(rs.getInt(8));
                 ja.setOfferID(rs.getInt(9));
                 ja.setState(rs.getInt(10));
+                ja.setMapID(rs.getInt(11));
 
                 return ja;
             }
