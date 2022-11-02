@@ -21,7 +21,7 @@ public class JobOffer {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public List<AllJobOffer> getAllByApplicantID(int aid){
+    public List<AllJobOffer> getAllByApplicantID(int aid, int state){
         String sql = """
             SELECT JO.OfferID AS OfferID, JO.AccountID AS AccountID, TypeID, LocationID, DegreeID, NumOfRecruit, OfferEndTime, Salary, Age, Visual, JobDescription, Other, StartTime, EndTime, Address, BusinessID, Status, State, ApplicationID, MapID
             FROM JobMapping JM
@@ -29,7 +29,7 @@ public class JobOffer {
             WHERE JM.ApplicationID IN
             	(SELECT ApplicationID FROM Applicant App
             	INNER JOIN JobApplication JApp ON App.AccountID = JApp.AccountID
-            	WHERE App.AccountID =""" + aid + ")";
+            	WHERE App.AccountID =""" + aid + ") AND State = " + state;
         List<AllJobOffer> result = jdbcTemplate.query(sql, new RowMapper<>() {
             @Override
             public AllJobOffer mapRow(ResultSet rs, int rowNum) throws SQLException {
