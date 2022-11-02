@@ -2,6 +2,8 @@ package com.seal.api.gwf.service;
 
 import com.seal.api.gwf.dto.JobOffer;
 import com.seal.api.gwf.dto.create.JobOfferForm;
+import com.seal.api.gwf.dto.get.AllJobOffer;
+import com.seal.api.gwf.dto.get.RecruiterOffer;
 import com.seal.api.gwf.entity.JobOfferEntity;
 import com.seal.api.gwf.repository.JobOfferRepository;
 import com.seal.utils.Utils;
@@ -21,6 +23,9 @@ public class JobOfferService {
 
     @Autowired
     JobOfferRepository jobOfferRepository;
+
+    @Autowired
+    com.seal.api.gwf.dao.JobOffer jobOffer;
     @Autowired
     private ModelMapper mapper;
 
@@ -198,6 +203,10 @@ public class JobOfferService {
             result.add(mapper.map(jo, JobOffer.class));
         }
         return result;
+    }
+
+    public List<RecruiterOffer> getAllJAByApplicantID(int aid, int state) {
+        return jobOffer.getAllJAByApplicantID(aid, state);
     }
 
     public Integer applyJO(int oid, int jaid) {

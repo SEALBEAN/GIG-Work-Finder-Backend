@@ -2,6 +2,8 @@ package com.seal.api.gwf.controller;
 
 import com.seal.api.gwf.dto.JobOffer;
 import com.seal.api.gwf.dto.create.JobOfferForm;
+import com.seal.api.gwf.dto.get.AllJobOffer;
+import com.seal.api.gwf.dto.get.RecruiterOffer;
 import com.seal.api.gwf.entity.JobOfferEntity;
 import com.seal.api.gwf.service.CreateJOService;
 import com.seal.api.gwf.service.JobOfferService;
@@ -68,6 +70,21 @@ public class JobOfferController {
 
     @GetMapping("/GetAllJOUnActive/{aid}")
     public List<JobOffer> getAllJobOffersByAIDUnActive(@PathVariable int aid) {return jobOfferService.getAllJobOffersByAIDStatus(aid ,0);}
+
+    @GetMapping("/AppIDUnValid/{aid}")
+    public List<RecruiterOffer> getAllJAByApplicantIDUnValid(@PathVariable int aid){
+        return jobOfferService.getAllJAByApplicantID(aid, 0);
+    }
+
+    @GetMapping("/AppIDValid/{aid}")
+    public List<RecruiterOffer> getAllJAByApplicantIDValid(@PathVariable int aid){
+        return jobOfferService.getAllJAByApplicantID(aid, 1);
+    }
+
+    @GetMapping("/AppIDFinish/{aid}")
+    public List<RecruiterOffer> getAllJAByApplicantIDFinish(@PathVariable int aid){
+        return jobOfferService.getAllJAByApplicantID(aid, 2);
+    }
 
     @PostMapping("/ApplyJO")
     public ResponseEntity<?> applyJA(@RequestParam(value = "oid") int oid,
