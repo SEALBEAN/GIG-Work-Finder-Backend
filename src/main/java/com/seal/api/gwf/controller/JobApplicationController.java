@@ -30,17 +30,17 @@ public class JobApplicationController {
 
     @GetMapping("/RIDUnValid/{aid}")
     public List<AllJobApplication> getAllJAByRecruiterIDUnValid(@PathVariable int aid){
-        return jobApplicationService.getAllJAByRecruiterIDUnValid(aid);
+        return jobApplicationService.getAllJAByRecruiterID(aid, 0);
     }
 
     @GetMapping("/RIDValid/{aid}")
     public List<AllJobApplication> getAllJAByRecruiterIDValid(@PathVariable int aid){
-        return jobApplicationService.getAllJAByRecruiterIDValid(aid);
+        return jobApplicationService.getAllJAByRecruiterID(aid, 1);
     }
 
     @GetMapping("/RIDFinish/{aid}")
     public List<AllJobApplication> getAllJAByRecruiterIDFinish(@PathVariable int aid){
-        return jobApplicationService.getAllJAByRecruiterIDFinish(aid);
+        return jobApplicationService.getAllJAByRecruiterID(aid, 2);
     }
 
 

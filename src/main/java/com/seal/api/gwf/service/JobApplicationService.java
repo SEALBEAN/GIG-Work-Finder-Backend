@@ -33,16 +33,8 @@ public class JobApplicationService {
         return jobApplicationRepository.getAllByOfferID(offerID);
     }
 
-    public List<AllJobApplication> getAllJAByRecruiterIDUnValid(int aid) {
-        return jobApplication.getAllJAByRecruiterIDUnValid(aid);
-    }
-
-    public List<AllJobApplication> getAllJAByRecruiterIDValid(int aid) {
-        return jobApplication.getAllJAByRecruiterIDValid(aid);
-    }
-
-    public List<AllJobApplication> getAllJAByRecruiterIDFinish(int aid) {
-        return jobApplication.getAllJAByRecruiterIDFinish(aid);
+    public List<AllJobApplication> getAllJAByRecruiterID(int aid, int state) {
+        return jobApplication.getAllJAByRecruiterID(aid, state);
     }
 
     public List<AllJobOffer> getAllByApplicantID(int aid, int state) {
