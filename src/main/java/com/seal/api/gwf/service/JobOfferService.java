@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -92,12 +93,16 @@ public class JobOfferService {
             list.add(mapper.map(j, JobOffer.class));
         }
         //calculate popularScore
-        for (JobOffer j :
-                list) {
-            j.setPopularScore(jobOfferRepository.calPopularScore(j.getOfferID()));
+        try {
+            for (JobOffer j :
+                    list) {
+                j.setPopularScore(jobOfferRepository.calPopularScore(j.getOfferID()));
+            }
+            //sort lai theo popularScore DESC
+            list.sort(((o1, o2) -> o2.getPopularScore().compareTo(o1.getPopularScore())));
+        } catch (Exception e){
+            e.printStackTrace();
         }
-        //sort lai theo popularScore DESC
-        list.sort(((o1, o2) -> o2.getPopularScore().compareTo(o1.getPopularScore())));
         if (quantity == 0 || quantity >= list.size())
             return list;
         else {
