@@ -4,7 +4,6 @@ import com.seal.api.gwf.dto.Business;
 import com.seal.api.gwf.dto.create.BusinessForm;
 import com.seal.api.gwf.entity.BusinessEntity;
 import com.seal.api.gwf.repository.BusinessRepository;
-import com.seal.api.gwf.util.S3Util;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,13 +56,7 @@ public class BusinessService {
         String message = "";
         String link = "";
         if (bf.getBusinessLogo() != null) {
-            try {
-                String fileName = bf.getBusinessLogo().getOriginalFilename();
-                link = S3Util.uploadFile(fileName, bf.getBusinessLogo().getInputStream());
-                message = "Your file has been uploaded successfully!\n";
-            } catch (Exception ex) {
-                message = "Error uploading file: " + ex.getMessage();
-            }
+            link = bf.getBusinessLogo();
         }
         System.out.println(message);
         int result = businessRepository.addBusiness(bf.getLocationID(), bf.getAccountID(), bf.getAddress(), bf.getBusinessName(),
@@ -75,15 +68,7 @@ public class BusinessService {
         BusinessEntity be = businessRepository.getByID(bf.getBusinessID());
         String link = "";
         if (bf.getBusinessLogo() != null) {
-            String fileName = bf.getBusinessLogo().getOriginalFilename();
-            String message = "";
-            try {
-                link = S3Util.uploadFile(fileName, bf.getBusinessLogo().getInputStream());
-                message = "Your file has been uploaded successfully!\n";
-            } catch (Exception ex) {
-                message = "Error uploading file: " + ex.getMessage();
-            }
-            System.out.println(message);
+            link = bf.getBusinessLogo();
         } else {
             link = be.getBusinessLogo();
         }

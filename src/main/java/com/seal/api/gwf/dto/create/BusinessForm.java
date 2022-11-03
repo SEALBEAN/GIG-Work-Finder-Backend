@@ -22,13 +22,13 @@ public class BusinessForm {
 
     private String businessName;
 
-    private MultipartFile businessLogo;
+    private String businessLogo;
 
     private String description;
 
     private String benefit;
 
-    public BusinessForm(Integer locationID, Integer accountID, String address, String businessName, MultipartFile businessLogo, String description, String benefit) {
+    public BusinessForm(Integer locationID, Integer accountID, String address, String businessName, String businessLogo, String description, String benefit) {
         this.locationID = locationID;
         this.accountID = accountID;
         this.address = address;
