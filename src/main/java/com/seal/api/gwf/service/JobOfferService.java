@@ -205,7 +205,7 @@ public class JobOfferService {
         return result;
     }
 
-    public List<RecruiterOffer> getAllJAByApplicantID(int aid, int state) {
+    public List<AllJobOffer> getAllJAByApplicantID(int aid, int state) {
         return jobOffer.getAllJAByApplicantID(aid, state);
     }
 
