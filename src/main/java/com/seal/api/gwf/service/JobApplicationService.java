@@ -37,8 +37,8 @@ public class JobApplicationService {
         return jobApplication.getAllJAByRecruiterID(aid, state);
     }
 
-    public List<AllJobOffer> getAllByApplicantID(int aid, int state) {
-        return jobOffer.getAllByApplicantID(aid, state);
+    public List<AllJobOffer> getAllJAByApplicantID(int aid, int state) {
+        return jobOffer.getAllJAByApplicantID(aid, state);
     }
 
     public Integer updateJA(JobApplicationForm jaf){

@@ -211,7 +211,7 @@ public class JobOfferService {
     }
 
     public List<AllJobOffer> getAllJOByApplicantID(int aid, int state) {
-        return jobOffer.getAllByApplicantID(aid, state);
+        return jobOffer.getAllJOByApplicantID(aid, state);
     }
 
     public Integer applyJO(int oid, int jaid) {
