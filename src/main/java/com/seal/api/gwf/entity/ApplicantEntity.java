@@ -45,7 +45,7 @@ public class ApplicantEntity {
     private String phone;
 
     @Column(name = "DOB")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dob;
 
     @Column(name = "Gender")
