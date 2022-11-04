@@ -15,37 +15,17 @@ import java.util.Date;
 public class AllJobOffer {
     private int OfferID;
 
-    private int AccountID;
+    private String jobName;
 
-    private Integer TypeID;
+    private String buName;
 
-    private Integer LocationID;
+    private String buLogo;
 
-    private Integer DegreeID;
+    private String buAddress;
 
-    private int NumOfRecruit;
+    private String JOAddress;
 
-    private Date offerEndTime;
-
-    private int status;
-
-    private Integer salary;
-
-    private Integer age;
-
-    private Integer visual;
-
-    private String jobDescription;
-
-    private String other;
-
-    private Time startTime;
-
-    private Time endTime;
-
-    private String address;
-
-    private Integer businessID;
+    private Integer BusinessID;
 
     private int state;
 

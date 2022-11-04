@@ -210,8 +210,8 @@ public class JobOfferService {
         return result;
     }
 
-    public List<AllJobOffer> getAllJAByApplicantID(int aid, int state) {
-        return jobOffer.getAllJAByApplicantID(aid, state);
+    public List<AllJobOffer> getAllJOByApplicantID(int aid, int state) {
+        return jobOffer.getAllByApplicantID(aid, state);
     }
 
     public Integer applyJO(int oid, int jaid) {

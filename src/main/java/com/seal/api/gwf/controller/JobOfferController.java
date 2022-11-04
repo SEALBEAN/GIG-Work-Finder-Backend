@@ -72,18 +72,18 @@ public class JobOfferController {
     public List<JobOffer> getAllJobOffersByAIDUnActive(@PathVariable int aid) {return jobOfferService.getAllJobOffersByAIDStatus(aid ,0);}
 
     @GetMapping("/AppIDUnValid/{aid}")
-    public List<AllJobOffer> getAllJAByApplicantIDUnValid(@PathVariable int aid){
-        return jobOfferService.getAllJAByApplicantID(aid, 0);
+    public List<AllJobOffer> getAllJOByApplicantIDUnValid(@PathVariable int aid){
+        return jobOfferService.getAllJOByApplicantID(aid, 0);
     }
 
     @GetMapping("/AppIDValid/{aid}")
-    public List<AllJobOffer> getAllJAByApplicantIDValid(@PathVariable int aid){
-        return jobOfferService.getAllJAByApplicantID(aid, 1);
+    public List<AllJobOffer> getAllJOByApplicantIDValid(@PathVariable int aid){
+        return jobOfferService.getAllJOByApplicantID(aid, 1);
     }
 
     @GetMapping("/AppIDFinish/{aid}")
-    public List<AllJobOffer> getAllJAByApplicantIDFinish(@PathVariable int aid){
-        return jobOfferService.getAllJAByApplicantID(aid, 2);
+    public List<AllJobOffer> getAllJOByApplicantIDFinish(@PathVariable int aid){
+        return jobOfferService.getAllJOByApplicantID(aid, 2);
     }
 
     @PostMapping("/ApplyJO")
