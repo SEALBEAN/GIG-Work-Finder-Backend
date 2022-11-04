@@ -18,12 +18,16 @@ public class BusinessController {
 
 
     @GetMapping("/ID/{id}")
-    public Business getById(@PathVariable int id) {return businessService.getByID(id);}
+    public Business getById(@PathVariable int id) {
+        return businessService.getByID(id);
+    }
 
     @GetMapping("/AID/{aid}")
-    public List<Business> getByAccountId(@PathVariable int aid) {return businessService.getByAccountID(aid);}
+    public List<Business> getByAccountId(@PathVariable int aid) {
+        return businessService.getByAccountID(aid);
+    }
 
-    @GetMapping(value = { "/ALL"})
+    @GetMapping(value = {"/ALL"})
     @ResponseBody
     public List<Business> getAllJobOffers(@RequestParam(required = false) Integer limit) {
         if (limit == null)
@@ -33,42 +37,65 @@ public class BusinessController {
     }
 
     @PostMapping("/CreateBu")
-        public ResponseEntity<?> createBu(@RequestParam("locationID") Integer locationID,
-                                          @RequestParam("accountID") Integer accountID,
-                                          @RequestParam(value = "address",required = false) String address,
-                                          @RequestParam(value = "businessName", required = false) String businessName,
-                                          @RequestParam(value = "businessLogo", required = false) String businessLogo,
-                                          @RequestParam(value = "description", required = false) String description,
-                                          @RequestParam(value = "benefit" , required = false) String benefit) {
-            try {
+    public ResponseEntity<?> createBu(@RequestParam("locationID") Integer locationID,
+                                      @RequestParam("accountID") Integer accountID,
+                                      @RequestParam(value = "address", required = false) String address,
+                                      @RequestParam(value = "businessName", required = false) String businessName,
+                                      @RequestParam(value = "businessLogo", required = false) String businessLogo,
+                                      @RequestParam(value = "description", required = false) String description,
+                                      @RequestParam(value = "benefit", required = false) String benefit) {
+        try {
+            if (address.equals("undefined"))
+                address = "Chưa cập nhật";
+            if (businessName.equals("undefined"))
+                businessName = "Chưa cập nhật";
+            if (businessLogo.equals("undefined"))
+                businessLogo = "Chưa cập nhật";
+            if (description.equals("undefined"))
+                description = "Chưa cập nhật";
+            if (benefit.equals("undefined"))
+                benefit = "Chưa cập nhật";
             BusinessForm bf = new BusinessForm(locationID, accountID, address, businessName, businessLogo, description, benefit);
             Integer result = businessService.createBu(bf);
             if (result == 1)
                 return ResponseEntity.ok(HttpStatus.OK);
             else
                 return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getStackTrace());
         }
     }
 
     @PutMapping("/UpdateBu")
     public ResponseEntity<?> UpdateBu(@RequestParam("businessID") Integer businessID,
-                                      @RequestParam(value = "locationID", required = false) Integer locationID,
+                                      @RequestParam(value = "locationID", required = false) String LocationID,
                                       @RequestParam("accountID") Integer accountID,
-                                      @RequestParam(value = "address",required = false) String address,
+                                      @RequestParam(value = "address", required = false) String address,
                                       @RequestParam(value = "businessName", required = false) String businessName,
                                       @RequestParam(value = "businessLogo", required = false) String businessLogo,
                                       @RequestParam(value = "description", required = false) String description,
-                                      @RequestParam(value = "benefit" , required = false) String benefit) {
+                                      @RequestParam(value = "benefit", required = false) String benefit) {
         try {
+            Integer locationID = null;
+            if (!LocationID.equals("undefined"))
+                locationID = Integer.parseInt(LocationID);
+            if (address.equals("undefined"))
+                address = null;
+            if (businessName.equals("undefined"))
+                businessName = null;
+            if (businessLogo.equals("undefined"))
+                businessLogo = null;
+            if (description.equals("undefined"))
+                description = null;
+            if (benefit.equals("undefined"))
+                benefit = null;
             BusinessForm bf = new BusinessForm(businessID, locationID, accountID, address, businessName, businessLogo, description, benefit);
             Integer result = businessService.updateBu(bf);
             if (result == 1)
                 return ResponseEntity.ok(HttpStatus.OK);
             else
                 return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getStackTrace());
         }
     }
