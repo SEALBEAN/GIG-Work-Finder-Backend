@@ -43,5 +43,10 @@ public interface JobApplicationRepository extends JpaRepository<JobApplicationEn
     Integer updateJA(int accountID, String other, Time startTime, Time endTime, int available);
 
 
+    @Query(value = """
+            SELECT ApplicationID FROM Applicant App
+            INNER JOIN JobApplication JApp ON App.AccountID = JApp.AccountID
+            WHERE App.AccountID = :aid """, nativeQuery = true)
+    List<Integer> getALLJobAppIDByAccountID(int aid);
 
 }

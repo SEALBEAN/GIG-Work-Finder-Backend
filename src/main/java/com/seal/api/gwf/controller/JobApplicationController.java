@@ -64,6 +64,11 @@ public class JobApplicationController {
         return jobApplicationService.getAllJAByApplicantID(aid, 3);
     }
 
+    @GetMapping("/ALLJobApp/{aid}")
+    public List<Integer> getALLJobAppIDByAccountID(@PathVariable int aid){
+        return jobApplicationService.getALLJobAppIDByAccountID(aid);
+    }
+
     @PostMapping("/ApplyJA")
     public ResponseEntity<?> applyJA(@RequestParam(value = "oid", required = false) Integer oid,
                                      @RequestParam(value = "jaid") int jaid,

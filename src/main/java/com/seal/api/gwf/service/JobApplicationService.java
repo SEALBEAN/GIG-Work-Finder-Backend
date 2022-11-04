@@ -67,4 +67,8 @@ public class JobApplicationService {
     public Integer applyJA(Integer oid, int jaid, int aid) {
         return jobApplicationRepository.applyJA(oid, jaid, aid);
     }
+
+    public List<Integer> getALLJobAppIDByAccountID(int aid) {
+        return jobApplicationRepository.getALLJobAppIDByAccountID(aid);
+    }
 }
