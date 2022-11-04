@@ -29,7 +29,7 @@ public class JobApplication {
             INNER JOIN Applicant A on JA.AccountID = A.AccountID
             INNER JOIN Business B on JO.BusinessID = B.BusinessID
             INNER JOIN JobType JT on JO.TypeID = JT.TypeID
-            WHERE JM.State =""" + state + " AND JO.AccountID = "+ aid;
+            WHERE JM.State =""" + state + " AND JO.AccountID = "+ aid + " AND JM.AccountID IS NULL";
         List<AllJobApplication> result = jdbcTemplate.query(sql, new RowMapper<>(){
             @Override
             public AllJobApplication mapRow(ResultSet rs, int rowNum) throws SQLException {
