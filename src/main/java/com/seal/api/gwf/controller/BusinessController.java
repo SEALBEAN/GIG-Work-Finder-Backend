@@ -45,14 +45,24 @@ public class BusinessController {
                                       @RequestParam(value = "description", required = false) String description,
                                       @RequestParam(value = "benefit", required = false) String benefit) {
         try {
+            if (address == null)
+                address = "Chưa cập nhật";
             if (address.equals("undefined"))
                 address = "Chưa cập nhật";
+            if (businessName == null)
+                businessName = "Chưa cập nhật";
             if (businessName.equals("undefined"))
                 businessName = "Chưa cập nhật";
+            if (businessLogo == null)
+                businessLogo = "https://gwfapp.s3.ap-southeast-1.amazonaws.com/Pictures/NullLogo.png";
             if (businessLogo.equals("undefined"))
-                businessLogo = "Chưa cập nhật";
+                businessLogo = "https://gwfapp.s3.ap-southeast-1.amazonaws.com/Pictures/NullLogo.png";
+            if (description == null)
+                description = "Chưa cập nhật";
             if (description.equals("undefined"))
                 description = "Chưa cập nhật";
+            if (benefit == null)
+                benefit = "Chưa cập nhật";
             if (benefit.equals("undefined"))
                 benefit = "Chưa cập nhật";
             BusinessForm bf = new BusinessForm(locationID, accountID, address, businessName, businessLogo, description, benefit);
@@ -77,18 +87,24 @@ public class BusinessController {
                                       @RequestParam(value = "benefit", required = false) String benefit) {
         try {
             Integer locationID = null;
-            if (!LocationID.equals("undefined"))
-                locationID = Integer.parseInt(LocationID);
-            if (address.equals("undefined"))
-                address = null;
-            if (businessName.equals("undefined"))
-                businessName = null;
-            if (businessLogo.equals("undefined"))
-                businessLogo = null;
-            if (description.equals("undefined"))
-                description = null;
-            if (benefit.equals("undefined"))
-                benefit = null;
+            if (LocationID != null)
+                if (!LocationID.equals("undefined"))
+                    locationID = Integer.parseInt(LocationID);
+            if (address != null)
+                if (address.equals("undefined"))
+                    address = null;
+            if (businessName != null)
+                if (businessName.equals("undefined"))
+                    businessName = null;
+            if (businessLogo != null)
+                if (businessLogo.equals("undefined"))
+                    businessLogo = null;
+            if (description != null)
+                if (description.equals("undefined"))
+                    description = null;
+            if (benefit != null)
+                if (benefit.equals("undefined"))
+                    benefit = null;
             BusinessForm bf = new BusinessForm(businessID, locationID, accountID, address, businessName, businessLogo, description, benefit);
             Integer result = businessService.updateBu(bf);
             if (result == 1)
