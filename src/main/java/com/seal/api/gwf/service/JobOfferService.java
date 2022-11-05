@@ -3,7 +3,6 @@ package com.seal.api.gwf.service;
 import com.seal.api.gwf.dto.JobOffer;
 import com.seal.api.gwf.dto.create.JobOfferForm;
 import com.seal.api.gwf.dto.get.AllJobOffer;
-import com.seal.api.gwf.dto.get.RecruiterOffer;
 import com.seal.api.gwf.entity.JobOfferEntity;
 import com.seal.api.gwf.repository.JobOfferRepository;
 import com.seal.utils.Utils;
@@ -11,7 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -210,8 +208,12 @@ public class JobOfferService {
         return result;
     }
 
-    public List<AllJobOffer> getAllJOByApplicantID(int aid, int state) {
-        return jobOffer.getAllJOByApplicantID(aid, state);
+    public List<AllJobOffer> getAllJOValidAndFinishByApplicantID(int aid, int state) {
+        return jobOffer.getAllJOValidAndFinishByApplicantID(aid, state);
+    }
+
+    public List<AllJobOffer> getAllJOOfferedByApplicantID(int aid) {
+        return jobOffer.getAllJOOfferedByApplicantID(aid, 0);
     }
 
     public Integer applyJO(int oid, int jaid) {
