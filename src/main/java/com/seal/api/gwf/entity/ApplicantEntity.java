@@ -75,6 +75,9 @@ public class ApplicantEntity {
     @Column(name = "Avatar")
     private String avatar;
 
+    @Column(name = "Available")
+    private int available;
+
     @JsonBackReference
     @OneToMany(mappedBy = "accountID",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = JobApplicationEntity.class)
     private Set<JobApplicationEntity> jobApplications = new HashSet<>();
