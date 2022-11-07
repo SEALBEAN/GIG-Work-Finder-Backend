@@ -28,7 +28,7 @@ public class ApplicantController {
     public ResponseEntity<?> updateApp(@RequestBody ApplicantForm app){
         try{
             Integer result = applicantService.updateApp(app);
-            if (result >= 2)
+            if (result >= 1)
                 return ResponseEntity.ok(HttpStatus.OK);
             else
                 return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(null);

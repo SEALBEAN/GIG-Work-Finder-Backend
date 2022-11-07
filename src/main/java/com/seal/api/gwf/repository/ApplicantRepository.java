@@ -36,7 +36,7 @@ public interface ApplicantRepository extends JpaRepository<ApplicantEntity, Inte
             WHERE AccountID = ?1
             
             UPDATE JobApplication
-            SET Available = ?11
+            SET Available = ?11, CreatedDate = GETDATE(), EndDate = GETDATE()+30
             WHERE AccountID = ?1
             """, nativeQuery = true)
     @Transactional
