@@ -25,7 +25,7 @@ public class ApplicantService {
             if (appe.getDob() != null)
                 dob = appe.getDob();
         } else {
-                dob = Timestamp.valueOf(LocalDateTime.parse(app.getDob()+ " 00:00:00", Utils.DAYTIMEFORMATDDMMYYYY));
+                dob = Timestamp.valueOf(LocalDateTime.parse(app.getDob()+ " 00:00:00", Utils.DAYTIMEFORMATYYYYMMDD));
         }
 
         if (app.getLocationID() == null) {

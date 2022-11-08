@@ -115,7 +115,7 @@ public class JobOfferService {
             startTime = Time.valueOf(joe.getStartTime() + ":00");
         if (joe.getEndTime() != null)
             endTime = Time.valueOf(joe.getEndTime() + ":00");
-        LocalDateTime d = LocalDateTime.parse(joe.getOfferEndTime() + " 00:00:00", Utils.DAYTIMEFORMATDDMMYYYY);
+        LocalDateTime d = LocalDateTime.parse(joe.getOfferEndTime() + " 00:00:00", Utils.DAYTIMEFORMATYYYYMMDD);
         offerEndTime = Timestamp.valueOf(d);
         Timestamp createdDate = new Timestamp(System.currentTimeMillis());
         return jobOfferRepository.addJobOffer(joe.getAccountID(), joe.getJobType(), joe.getLocation(), joe.getDegree(), joe.getNumOfRecruit()
@@ -143,7 +143,7 @@ public class JobOfferService {
         if (joe.getOfferEndTime() == null) {
             offerEndTime = jo.getOfferEndTime();
         } else {
-            offerEndTime = Timestamp.valueOf(LocalDateTime.parse(joe.getOfferEndTime() + " 00:00:00", Utils.DAYTIMEFORMATDDMMYYYY));
+            offerEndTime = Timestamp.valueOf(LocalDateTime.parse(joe.getOfferEndTime() + " 00:00:00", Utils.DAYTIMEFORMATYYYYMMDD));
         }
         Timestamp createdDate = new Timestamp(System.currentTimeMillis());
 

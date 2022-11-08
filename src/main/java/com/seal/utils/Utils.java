@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  */
 public class Utils {
 
-    public static final DateTimeFormatter DAYTIMEFORMATDDMMYYYY = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm:ss"); //format cho Date
+    public static final DateTimeFormatter DAYTIMEFORMATYYYYMMDD = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss"); //format cho Date
     public static final DateTimeFormatter DAYFORMATDDMMYYYY = DateTimeFormatter.ofPattern("dd/MM/uuuu");
     private static final Scanner sc = new Scanner(System.in);
 
@@ -233,7 +233,7 @@ public class Utils {
             }
 
         } while (cont == false);
-        date = LocalDate.parse(tmp, DAYTIMEFORMATDDMMYYYY);
+        date = LocalDate.parse(tmp, DAYTIMEFORMATYYYYMMDD);
         return date;
     }
 
@@ -266,7 +266,7 @@ public class Utils {
                 }
             }
         } while (cont == false);
-        date = LocalDate.parse(tmp, DAYTIMEFORMATDDMMYYYY);
+        date = LocalDate.parse(tmp, DAYTIMEFORMATYYYYMMDD);
         return date;
     }
 
