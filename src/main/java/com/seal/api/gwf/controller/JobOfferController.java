@@ -3,7 +3,6 @@ package com.seal.api.gwf.controller;
 import com.seal.api.gwf.dto.JobOffer;
 import com.seal.api.gwf.dto.create.JobOfferForm;
 import com.seal.api.gwf.dto.get.AllJobOffer;
-import com.seal.api.gwf.dto.get.RecruiterOffer;
 import com.seal.api.gwf.entity.JobOfferEntity;
 import com.seal.api.gwf.service.CreateJOService;
 import com.seal.api.gwf.service.JobOfferService;
@@ -73,17 +72,17 @@ public class JobOfferController {
 
     @GetMapping("/AppIDUnValid/{aid}")
     public List<AllJobOffer> getAllJOByApplicantIDUnValid(@PathVariable int aid){
-        return jobOfferService.getAllJOByApplicantID(aid, 0);
+        return jobOfferService.getAllJOOfferedByApplicantID(aid);
     }
 
     @GetMapping("/AppIDValid/{aid}")
     public List<AllJobOffer> getAllJOByApplicantIDValid(@PathVariable int aid){
-        return jobOfferService.getAllJOByApplicantID(aid, 1);
+        return jobOfferService.getAllJOValidAndFinishByApplicantID(aid, 1);
     }
 
     @GetMapping("/AppIDFinish/{aid}")
     public List<AllJobOffer> getAllJOByApplicantIDFinish(@PathVariable int aid){
-        return jobOfferService.getAllJOByApplicantID(aid, 2);
+        return jobOfferService.getAllJOValidAndFinishByApplicantID(aid, 2);
     }
 
     @PostMapping("/ApplyJO")

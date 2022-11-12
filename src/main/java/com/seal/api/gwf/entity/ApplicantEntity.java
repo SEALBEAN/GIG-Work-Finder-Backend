@@ -45,7 +45,7 @@ public class ApplicantEntity {
     private String phone;
 
     @Column(name = "DOB")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dob;
 
     @Column(name = "Gender")
@@ -74,6 +74,9 @@ public class ApplicantEntity {
 
     @Column(name = "Avatar")
     private String avatar;
+
+    @Column(name = "Available")
+    private int available;
 
     @JsonBackReference
     @OneToMany(mappedBy = "accountID",fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = JobApplicationEntity.class)
