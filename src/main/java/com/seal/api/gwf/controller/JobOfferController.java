@@ -87,7 +87,7 @@ public class JobOfferController {
     }
 
     @PostMapping("/ApplyJO")
-    public ResponseEntity<?> applyJA(@RequestParam(value = "oid") int oid,
+    public ResponseEntity<?> applyJO(@RequestParam(value = "oid") int oid,
                                      @RequestParam(value = "jaid") int jaid){
         try {
             Integer result = jobOfferService.applyJO(oid, jaid);
