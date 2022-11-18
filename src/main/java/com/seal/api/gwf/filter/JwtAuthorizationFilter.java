@@ -51,6 +51,7 @@ public class JwtAuthorizationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
         boolean passed = false;
+        String message = "";
         int errorCode = HttpStatus.UNAUTHORIZED.value();
         System.out.println("Url raw: " + request.getRequestURI() + " " + request.getMethod());
         if ("POST".equals(request.getMethod()) || "PUT".equals(request.getMethod()) || "DELETE".equals(request.getMethod())) {
@@ -82,13 +83,14 @@ public class JwtAuthorizationFilter implements Filter {
                                 passed = true;
                             }
                         } catch (Exception e) {
-                            System.out.println("Exception: " + e.getMessage());
+                            message = ("Exception: " + e.getMessage());
                             errorCode = HttpStatus.NOT_FOUND.value();
                         }
                     }
                     else {
 //                        System.out.println("This is filter! Token is undefined! ");
 //                        filterChain.doFilter(servletRequest, servletResponse);
+                        message = "Unauthorized: undefined ";
                         errorCode = HttpStatus.BAD_REQUEST.value();
 
 
@@ -96,6 +98,7 @@ public class JwtAuthorizationFilter implements Filter {
                 } else {
 //                    System.out.println("This is filter! Don't have token! ");
 //                    filterChain.doFilter(servletRequest, servletResponse);
+                    message = "Unauthorized: null or empty ";
                     errorCode = HttpStatus.UNAUTHORIZED.value();
 
                 }
@@ -111,7 +114,7 @@ public class JwtAuthorizationFilter implements Filter {
                 filterChain.doFilter(servletRequest, servletResponse);
             else {
                 HttpServletResponse response = (HttpServletResponse) servletResponse;
-                response.sendError(errorCode, "Unauthorized!");
+                response.sendError(errorCode, message);
             }
 
     }
