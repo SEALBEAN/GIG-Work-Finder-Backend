@@ -83,13 +83,13 @@ public class JwtAuthorizationFilter implements Filter {
                             }
                         } catch (Exception e) {
                             System.out.println("Exception: " + e.getMessage());
-                            errorCode = HttpStatus.UNAUTHORIZED.value();
+                            errorCode = HttpStatus.NOT_FOUND.value();
                         }
                     }
                     else {
 //                        System.out.println("This is filter! Token is undefined! ");
 //                        filterChain.doFilter(servletRequest, servletResponse);
-                        errorCode = HttpStatus.UNAUTHORIZED.value();
+                        errorCode = HttpStatus.BAD_REQUEST.value();
 
 
                     }
