@@ -62,7 +62,7 @@ public class JwtAuthorizationFilter implements Filter {
             while (url.endsWith("/")) url = url.substring(0,url.length()-1);
             if (url.contains("https://gig-worker-backend.azurewebsites.net")) url = url.substring("https://gig-worker-backend.azurewebsites.net".length()-1);
             System.out.println(url);
-            if (!"1".equals(guestProperties.getProperty(url))) {
+            if (!"1".equals(guestProperties.getProperty(url)) || "/Authorization".equals(url)) {
                 System.out.println("raw string: " + tokenString);
                 if (tokenString != null && !tokenString.isEmpty()) {
                     tokenString = tokenString.trim();
