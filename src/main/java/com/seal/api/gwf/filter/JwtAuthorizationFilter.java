@@ -38,9 +38,9 @@ public class JwtAuthorizationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         Filter.super.init(filterConfig);
-        guestProperties = loadProperties("E:\\Languages and Tools\\ReactJs\\Github\\GIG-Work-Finder-Backend\\src\\main\\java\\com\\seal\\api\\gwf\\filter\\authorizationResources\\guest.properties");
-        applicantProperties = loadProperties("E:\\Languages and Tools\\ReactJs\\Github\\GIG-Work-Finder-Backend\\src\\main\\java\\com\\seal\\api\\gwf\\filter\\authorizationResources\\applicant.properties");
-        recruiterProperties = loadProperties("E:\\Languages and Tools\\ReactJs\\Github\\GIG-Work-Finder-Backend\\src\\main\\java\\com\\seal\\api\\gwf\\filter\\authorizationResources\\recruiter.properties");
+        guestProperties = loadProperties(".\\src\\main\\java\\com\\seal\\api\\gwf\\filter\\authorizationResources\\guest.properties");
+        applicantProperties = loadProperties(".\\src\\main\\java\\com\\seal\\api\\gwf\\filter\\authorizationResources\\applicant.properties");
+        recruiterProperties = loadProperties(".\\src\\main\\java\\com\\seal\\api\\gwf\\filter\\authorizationResources\\recruiter.properties");
 
 
     }
@@ -60,7 +60,7 @@ public class JwtAuthorizationFilter implements Filter {
             String url = request.getRequestURI();
             url = url.replaceAll("[0-9]+", "Number");
             while (url.endsWith("/")) url = url.substring(0,url.length()-1);
-            if (url.contains("https://gig-worker-backend.azurewebsites.net")) url = url.substring("https://gig-worker-backend.azurewebsites.net".length()-1,url.length());
+            if (url.contains("https://gig-worker-backend.azurewebsites.net")) url = url.substring("https://gig-worker-backend.azurewebsites.net".length()-1);
             System.out.println(url);
             if (!"1".equals(guestProperties.getProperty(url))) {
                 System.out.println("raw string: " + tokenString);
