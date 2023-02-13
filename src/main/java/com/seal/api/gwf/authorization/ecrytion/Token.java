@@ -19,4 +19,5 @@ public class Token {
     private String name;
     private String picUrl;
     private String gender;//    Nam/Nữ
+
 }
